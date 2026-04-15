@@ -1,0 +1,160 @@
+﻿:root {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --text: #111111;
+  --muted: #616161;
+  --line: #e6e6e6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", sans-serif;
+}
+
+.settings-shell {
+  width: min(960px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 28px 0 40px;
+}
+
+.settings-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.eyebrow,
+.version-card span {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+h1,
+h2 {
+  margin: 0;
+}
+
+.intro {
+  max-width: 60ch;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.panel,
+.version-card {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+}
+
+.version-card,
+.panel {
+  padding: 20px;
+}
+
+.panel + .panel {
+  margin-top: 18px;
+}
+
+.settings-form {
+  display: grid;
+  gap: 18px;
+}
+
+.settings-form label,
+.settings-form fieldset {
+  display: grid;
+  gap: 10px;
+}
+
+input,
+button {
+  font: inherit;
+}
+
+input[type="number"] {
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+}
+
+.checkbox-label {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+}
+
+button {
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid #111111;
+  border-radius: 10px;
+  background: #111111;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+button.secondary {
+  background: #ffffff;
+  color: #111111;
+  border-color: var(--line);
+}
+
+.status-message {
+  min-height: 1.4em;
+  margin: 0;
+  color: var(--muted);
+}
+
+.status-message[data-state="error"] {
+  color: #b42318;
+}
+
+.status-message[data-state="success"] {
+  color: #067647;
+}
+
+.panel-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.plain-list {
+  margin: 12px 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+@media (max-width: 720px) {
+  .settings-header,
+  .panel-grid,
+  .actions {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+  }
+}

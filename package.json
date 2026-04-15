@@ -1,0 +1,10 @@
+﻿{
+  "name": "proxy-extension",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "test": "node tests/run-tests.js",
+    "package:extension": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/package-extension.ps1",
+    "generate:icons": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/generate-icons.ps1"
+  }
+}

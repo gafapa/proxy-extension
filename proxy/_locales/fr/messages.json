@@ -1,0 +1,8 @@
+{
+  "appName": {
+    "message": "Proxy Extension"
+  },
+  "appDescription": {
+    "message": "Extension proxy pour les problèmes de requêtes liés à CORS."
+  }
+}

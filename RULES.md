@@ -14,7 +14,8 @@
 ## Security
 
 - Accept only `http` and `https` request targets.
-- Review changes to `host_permissions` and content script `matches` carefully.
+- Keep content script `matches` limited to approved web application origins.
+- Restrict bridge usage to `gallego.top` and local development origins unless requirements change.
 - Do not add credential persistence unless explicitly required.
 
 ## Documentation Sync

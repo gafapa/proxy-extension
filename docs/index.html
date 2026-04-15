@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proxy Extension</title>
+    <meta
+      name="description"
+      content="Proxy Extension is a Chrome MV3 proxy for CORS-related request issues with a direct package download and installation guide."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <div class="site">
+      <header class="topbar">
+        <a class="brand" href="#top" data-i18n="brand">Proxy Extension</a>
+        <div class="topbar-actions">
+          <nav class="topnav" aria-label="Primary" data-i18n-attr="aria-label:navAriaLabel">
+            <a href="#download" data-i18n="navDownload">Download</a>
+            <a href="#install" data-i18n="navInstall">Install</a>
+            <a href="#scope" data-i18n="navScope">Scope</a>
+          </nav>
+          <label class="language-picker">
+            <span class="language-label" data-i18n="languageLabel">Language</span>
+            <select id="language-select" aria-label="Language" data-i18n-attr="aria-label:languageLabel">
+              <option value="es">Español</option>
+              <option value="gl">Galego</option>
+              <option value="en">English</option>
+              <option value="fr">Français</option>
+              <option value="de">Deutsch</option>
+              <option value="pt">Português</option>
+              <option value="ca">Català</option>
+              <option value="eu">Euskara</option>
+            </select>
+          </label>
+          <span class="version-chip">v0.1.0</span>
+        </div>
+      </header>
+
+      <main id="top">
+        <section class="hero">
+          <div class="hero-copy">
+            <p class="kicker" data-i18n="heroKicker">Chrome MV3 proxy</p>
+            <h1 data-i18n="heroTitle">Resolve browser-side CORS blockers with a direct extension bridge.</h1>
+            <p class="lead" data-i18n="heroLead">
+              Proxy Extension forwards requests through a Chrome service worker so your frontend can reach blocked endpoints while usage stays limited to gallego.top, subdomains of gallego.top, and local development pages.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="./downloads/proxy-extension.zip" download data-i18n="heroPrimaryCta">Download package</a>
+              <a class="button button-secondary" href="#install" data-i18n="heroSecondaryCta">Installation guide</a>
+            </div>
+          </div>
+
+          <aside class="hero-meta" aria-label="Extension summary" data-i18n-attr="aria-label:heroMetaAriaLabel">
+            <div class="meta-row">
+              <span class="meta-label" data-i18n="metaFlowLabel">Flow</span>
+              <strong data-i18n="metaFlowValue">page -> content script -> service worker -> target</strong>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label" data-i18n="metaCallersLabel">Caller pages</span>
+              <strong data-i18n="metaCallersValue">gallego.top, localhost, 127.0.0.1</strong>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label" data-i18n="metaTargetsLabel">Target hosts</span>
+              <strong data-i18n="metaTargetsValue">Any HTTP or HTTPS endpoint</strong>
+            </div>
+          </aside>
+        </section>
+
+        <section class="section" id="download">
+          <div class="section-header">
+            <p class="kicker" data-i18n="downloadKicker">Download</p>
+            <h2 data-i18n="downloadTitle">One package, ready to extract.</h2>
+          </div>
+          <div class="download-panel">
+            <div>
+              <p class="meta-label" data-i18n="archiveLabel">Archive</p>
+              <p class="package-name">proxy-extension.zip</p>
+              <p class="muted" data-i18n="archiveDescription">The zip contains manifest.json, content-script.js, and service-worker.js at the archive root.</p>
+            </div>
+            <a class="button button-primary" href="./downloads/proxy-extension.zip" download data-i18n="downloadCta">Download zip</a>
+          </div>
+        </section>
+
+        <section class="section" id="install">
+          <div class="section-header">
+            <p class="kicker" data-i18n="installKicker">Install</p>
+            <h2 data-i18n="installTitle">Load the extension in Chrome.</h2>
+          </div>
+          <div class="steps">
+            <article class="step">
+              <span class="step-number">01</span>
+              <h3 data-i18n="step1Title">Download and extract</h3>
+              <p data-i18n="step1Body">Download proxy-extension.zip and extract it to any local folder.</p>
+            </article>
+            <article class="step">
+              <span class="step-number">02</span>
+              <h3 data-i18n="step2Title">Enable Developer mode</h3>
+              <p data-i18n="step2Body">Open chrome://extensions and enable Developer mode.</p>
+            </article>
+            <article class="step">
+              <span class="step-number">03</span>
+              <h3 data-i18n="step3Title">Load unpacked</h3>
+              <p data-i18n="step3Body">Select the extracted folder that contains manifest.json at its root.</p>
+            </article>
+            <article class="step">
+              <span class="step-number">04</span>
+              <h3 data-i18n="step4Title">Use it from allowed pages</h3>
+              <p data-i18n="step4Body">Run the bridge from gallego.top, localhost, or 127.0.0.1.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="scope">
+          <div class="section-header">
+            <p class="kicker" data-i18n="scopeKicker">Scope</p>
+            <h2 data-i18n="scopeTitle">Open target access, restricted caller access.</h2>
+          </div>
+          <div class="scope-grid">
+            <div class="scope-copy">
+              <p data-i18n="scopeParagraph1">The extension can call any http or https endpoint, which keeps it usable across different Moodle deployments and other services without repackaging.</p>
+              <p data-i18n="scopeParagraph2">The restriction is on who can use it. The bridge only accepts callers from gallego.top, *.gallego.top, localhost, and 127.0.0.1.</p>
+            </div>
+            <ul class="scope-list">
+              <li data-i18n="scopeList1">Includes credentials for cookie-backed sessions.</li>
+              <li data-i18n="scopeList2">Rejects unsupported protocols.</li>
+              <li data-i18n="scopeList3">Filters unsafe transport headers.</li>
+              <li data-i18n="scopeList4">Validates the sender against the manifest allowlist.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="final-call">
+          <div>
+            <p class="kicker" data-i18n="finalKicker">Ready</p>
+            <h2 data-i18n="finalTitle">Download the package and load it directly into Chrome.</h2>
+            <p class="muted final-links">
+              <a href="./bridge-client.example.js">Bridge client example</a>
+              <span>·</span>
+              <a href="../CHANGELOG.md">Changelog</a>
+            </p>
+          </div>
+          <a class="button button-primary" href="./downloads/proxy-extension.zip" download data-i18n="finalCta">Get Proxy Extension</a>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

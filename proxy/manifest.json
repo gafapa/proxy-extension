@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "__MSG_appName__",
+  "version": "0.1.0",
+  "default_locale": "en",
+  "description": "__MSG_appDescription__",
+  "permissions": ["storage"],
+  "host_permissions": ["http://*/*", "https://*/*"],
+  "icons": {
+    "16": "assets/icon16.png",
+    "32": "assets/icon32.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "background": {
+    "service_worker": "service-worker.js"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://gallego.top/*",
+        "https://*.gallego.top/*",
+        "http://127.0.0.1/*",
+        "https://127.0.0.1/*",
+        "http://localhost/*",
+        "https://localhost/*"
+      ],
+      "js": ["shared/bridge-config.js", "shared/bridge-core.js", "content-script.js"],
+      "run_at": "document_start"
+    }
+  ]
+}

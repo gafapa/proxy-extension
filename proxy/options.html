@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proxy Extension Settings</title>
+    <link rel="stylesheet" href="./options.css" />
+    <script src="./shared/bridge-config.js"></script>
+    <script src="./shared/bridge-core.js"></script>
+    <script src="./options.js" defer></script>
+  </head>
+  <body>
+    <main class="settings-shell">
+      <header class="settings-header">
+        <div>
+          <p class="eyebrow" id="options-brand">Proxy Extension</p>
+          <h1 id="options-title">Bridge settings</h1>
+          <p class="intro" id="options-intro">
+            Configure request limits for the extension runtime. Caller page allowlists stay controlled by the manifest.
+          </p>
+        </div>
+        <div class="version-card">
+          <span id="version-label">Version</span>
+          <strong id="extension-version">0.1.0</strong>
+        </div>
+      </header>
+
+      <section class="panel">
+        <h2 id="runtime-limits-title">Runtime limits</h2>
+        <form id="settings-form" class="settings-form">
+          <label>
+            <span id="request-timeout-label">Request timeout (ms)</span>
+            <input id="request-timeout-ms" name="requestTimeoutMs" type="number" min="1000" max="120000" step="1000" required />
+          </label>
+          <label>
+            <span id="max-body-label">Max request body size (bytes)</span>
+            <input id="max-body-bytes" name="maxBodyBytes" type="number" min="1024" max="10485760" step="1024" required />
+          </label>
+          <fieldset>
+            <legend id="allowed-methods-label">Allowed HTTP methods</legend>
+            <div id="allowed-methods" class="checkbox-grid"></div>
+          </fieldset>
+          <div class="actions">
+            <button type="submit" id="save-button">Save settings</button>
+            <button type="button" id="reset-button" class="secondary">Reset defaults</button>
+          </div>
+          <p id="status-message" class="status-message" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="panel panel-grid">
+        <div>
+          <h2 id="allowed-callers-title">Allowed caller pages</h2>
+          <ul id="caller-pages" class="plain-list"></ul>
+        </div>
+        <div>
+          <h2 id="bridge-protocol-title">Bridge protocol</h2>
+          <ul class="plain-list">
+            <li><strong id="protocol-label">Protocol:</strong> <span id="protocol-name"></span></li>
+            <li><strong id="protocol-version-label">Version:</strong> <span id="protocol-version"></span></li>
+            <li><strong id="storage-key-label">Storage key:</strong> <span id="storage-key"></span></li>
+          </ul>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
