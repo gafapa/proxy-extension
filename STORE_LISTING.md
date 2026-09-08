@@ -18,10 +18,13 @@ Key features:
 
 - Authorize caller pages from the extension options page.
 - Configure request timeout, maximum request body size, maximum response body size, and allowed HTTP methods.
+- Keep the 1 MiB default upload limit, choose a finite limit up to 10 MiB, or set `0` for no extension-defined body limit.
 - Run with a self-contained Manifest V3 codebase.
 - Keep page startup lightweight by loading network request code only in the extension service worker.
 - Use localized extension settings in English, Spanish, French, German, Portuguese, Galician, Catalan, and Basque.
 - Open settings directly from the extension toolbar button.
+
+Edunoza integration uses the `edunoza-web` protocol identifier and requires the user to authorize `https://edunoza.com/*` explicitly. The default `GET` and `PUT` methods and allowed `Authorization` and `If-Match` headers support fixed-name encrypted-file synchronization with concurrent-update detection. WebDAV collection methods such as `PROPFIND` and `MKCOL` are not enabled.
 
 Security notes:
 

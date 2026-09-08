@@ -268,8 +268,10 @@
     const requestTimeoutMs = Number.isFinite(raw.requestTimeoutMs)
       ? Math.max(1000, Math.min(120000, Math.trunc(raw.requestTimeoutMs)))
       : DEFAULT_SETTINGS.requestTimeoutMs;
-    const maxBodyBytes = Number.isFinite(raw.maxBodyBytes)
-      ? Math.max(1024, Math.min(10 * 1024 * 1024, Math.trunc(raw.maxBodyBytes)))
+    const maxBodyBytes = raw.maxBodyBytes === 0
+      ? 0
+      : Number.isFinite(raw.maxBodyBytes)
+        ? Math.max(1024, Math.min(10 * 1024 * 1024, Math.trunc(raw.maxBodyBytes)))
       : DEFAULT_SETTINGS.maxBodyBytes;
     const maxResponseBytes = Number.isFinite(raw.maxResponseBytes)
       ? Math.max(1024, Math.min(50 * 1024 * 1024, Math.trunc(raw.maxResponseBytes)))
@@ -360,7 +362,7 @@
     }
 
     const byteLength = getByteLength(input);
-    if (byteLength > settings.maxBodyBytes) {
+    if (settings.maxBodyBytes > 0 && byteLength > settings.maxBodyBytes) {
       throw createBridgeError("body_too_large", "Request body exceeds the configured maximum size.", {
         maxBodyBytes: settings.maxBodyBytes,
         actualBodyBytes: byteLength,

@@ -1,5 +1,12 @@
 ﻿# Changelog
 
+## 0.2.5 - 2026-09-09
+
+- Added the `edunoza-web` bridge application identifier.
+- Added `0` as an unlimited request-body setting while retaining the 1 MiB default.
+- Documented the opt-in Edunoza caller pattern and fixed-file synchronization capabilities.
+- Bumped the extension package version to `0.2.5`.
+
 ## 0.2.4 - 2026-09-09
 
 - Renamed the extension and public product branding from `GateFetch` to `Proxy`.

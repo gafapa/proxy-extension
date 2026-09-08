@@ -20,6 +20,7 @@ Provide a standalone Chrome MV3 extension that proxies Moodle HTTP requests for 
 
 - `proxy/shared/bridge-config.js`
   - defines protocol identifiers, message types, storage keys, version information, and default settings
+  - accepts `moodle-analyzer-web`, `imageneando-studio`, and `edunoza-web` as page application identifiers
 
 - `proxy/shared/page-bridge.js`
   - contains only page-envelope validation and error serialization
@@ -78,7 +79,9 @@ Provide a standalone Chrome MV3 extension that proxies Moodle HTTP requests for 
 
 ## Runtime Loading
 
-Static and dynamically registered content scripts load `bridge-config.js`, `page-bridge.js`, and `content-script.js`. They do not load `bridge-core.js`. This reduces the page-injected JavaScript source from 33,906 bytes to 12,926 bytes in version `0.2.4`.
+Static and dynamically registered content scripts load `bridge-config.js`, `page-bridge.js`, and `content-script.js`. They do not load `bridge-core.js`. This reduces the page-injected JavaScript source from 33,906 bytes to 12,926 bytes in version `0.2.5`.
+
+A `maxBodyBytes` value of `0` disables the extension-defined request-body limit. Positive values are bounded between 1 KiB and 10 MiB. The default remains 1 MiB.
 
 The service worker loads `bridge-config.js` and `bridge-core.js` when Chrome starts it for an extension event. The options page loads the same two files only when the user opens settings.
 

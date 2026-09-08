@@ -76,6 +76,13 @@ The extension can contact any `http` or `https` host. This keeps the bridge usab
 
 - Click the extension toolbar icon or open `Extension options` from `chrome://extensions`.
 - The options page controls authorized caller pages, interface language, request timeout, maximum request body size, maximum response body size, and allowed HTTP methods.
+- The request body limit defaults to 1 MiB. Set it to `0` to remove the extension-defined limit; Chrome messaging, memory, and target-server limits still apply.
+
+## Edunoza
+
+Edunoza can use the bridge with the protocol source identifier `edunoza-web`. It is intentionally not a built-in caller origin. Add `https://edunoza.com/*` under **Authorized sites** in the extension options and save the settings before using it.
+
+The default method set includes `GET` and `PUT`. Request headers may include `Authorization` and `If-Match`, allowing Edunoza to exchange a fixed-name encrypted file and use entity tags to detect concurrent updates. `PROPFIND` and `MKCOL` are not supported, so the remote folder must already exist.
 
 ## Development Commands
 
@@ -89,9 +96,9 @@ Run packaging before the final test pass because the test suite also validates t
 ## Performance and Package Size
 
 - Authorized pages load only the protocol configuration, the lightweight page bridge, and the content script. The network request engine remains in the service worker and is not parsed by each page.
-- The page-injected JavaScript source is 12,926 bytes in version `0.2.4`, down from 33,906 bytes before the split.
+- The page-injected JavaScript source is 12,926 bytes in version `0.2.5`, down from 33,906 bytes before the split.
 - Packaging minifies JavaScript in a temporary staging directory. The readable source files in `proxy/` remain unchanged.
-- The version `0.2.4` distribution ZIP is 28,868 bytes. A regression test keeps packaged releases below 30 KiB.
+- A regression test keeps packaged releases below 30 KiB.
 - Audit-log persistence starts after request execution and does not delay delivery of the bridge response.
 
 ## Chrome Web Store Preparation

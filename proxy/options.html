@@ -19,7 +19,7 @@
         </div>
         <div class="status-card" aria-label="Extension status">
           <span id="version-label">Version</span>
-          <strong id="extension-version">0.2.4</strong>
+          <strong id="extension-version">0.2.5</strong>
           <span id="site-count-label">Authorized sites</span>
           <strong id="site-count">0</strong>
         </div>
@@ -79,8 +79,8 @@
                   <input id="request-timeout-ms" name="requestTimeoutMs" type="number" min="1000" max="120000" step="1000" required />
                 </label>
                 <label class="field-block">
-                  <span id="max-body-label">Max request body size (bytes)</span>
-                  <input id="max-body-bytes" name="maxBodyBytes" type="number" min="1024" max="10485760" step="1024" required />
+                  <span id="max-body-label">Max request body size (bytes, 0 = unlimited)</span>
+                  <input id="max-body-bytes" name="maxBodyBytes" type="number" min="0" max="10485760" step="1024" required />
                 </label>
                 <label class="field-block">
                   <span id="max-response-label">Max response body size (bytes)</span>

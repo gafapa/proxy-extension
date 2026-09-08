@@ -33,11 +33,11 @@
 
   return {
     APP_SOURCE: "moodle-analyzer-web",
-    APP_SOURCES: ["moodle-analyzer-web", "imageneando-studio"],
+    APP_SOURCES: ["moodle-analyzer-web", "imageneando-studio", "edunoza-web"],
     EXTENSION_SOURCE: "proxy-extension",
     PROTOCOL_NAME: "proxy-extension-bridge",
     PROTOCOL_VERSION: 1,
-    VERSION: "0.2.4",
+    VERSION: "0.2.5",
     STORAGE_KEY: "bridgeSettings",
     AUDIT_STORAGE_KEY: "proxyAuditLog",
     DYNAMIC_CONTENT_SCRIPT_ID: "user_allowed_bridge_pages",

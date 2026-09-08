@@ -74,6 +74,43 @@ const pageBridge = require(path.join(__dirname, "..", "proxy", "shared", "page-b
   );
 })();
 
+(function testBuildRequestAllowsUnlimitedBodySize() {
+  const settings = core.normalizeSettings({ maxBodyBytes: 0, allowedMethods: ["PUT"] });
+  const body = "x".repeat(11 * 1024 * 1024);
+  const request = core.buildRequest(
+    { url: "https://storage.example.com/encrypted.bin", method: "PUT", body },
+    settings,
+    ["https://*/*"],
+    { allowPrivateNetwork: false },
+  );
+
+  assert.equal(settings.maxBodyBytes, 0);
+  assert.equal(request.body.length, body.length);
+})();
+
+(function testEdunozaFileHeadersAndMethods() {
+  const settings = core.normalizeSettings({});
+  const request = core.buildRequest(
+    {
+      url: "https://storage.example.com/encrypted.bin",
+      method: "PUT",
+      headers: { Authorization: "Bearer example", "If-Match": '"revision"' },
+      body: "encrypted-content",
+    },
+    settings,
+    ["https://*/*"],
+    { allowPrivateNetwork: false },
+  );
+
+  assert.deepEqual(request.headers, { Authorization: "Bearer example", "If-Match": '"revision"' });
+  for (const method of ["PROPFIND", "MKCOL"]) {
+    assert.throws(
+      () => core.buildRequest({ url: "https://storage.example.com/folder", method }, settings, ["https://*/*"]),
+      (error) => error.code === "method_not_allowed",
+    );
+  }
+})();
+
 (function testBuildRequestBlocksPrivateNetworkWithoutPolicy() {
   const settings = core.normalizeSettings({});
   assert.throws(
@@ -275,6 +312,22 @@ const pageBridge = require(path.join(__dirname, "..", "proxy", "shared", "page-b
 
   assert.equal(result.valid, true);
   assert.equal(result.kind, config.MESSAGE_TYPES.REQUEST);
+})();
+
+(function testValidatePageEnvelopeAcceptsEdunoza() {
+  const result = pageBridge.validatePageEnvelope(
+    {
+      protocol: config.PROTOCOL_NAME,
+      version: config.PROTOCOL_VERSION,
+      source: "edunoza-web",
+      type: config.MESSAGE_TYPES.REQUEST,
+      requestId: "edunoza-request",
+      payload: { url: "https://storage.example.com/encrypted.bin" },
+    },
+    config.APP_SOURCES,
+  );
+
+  assert.equal(result.valid, true);
 })();
 
 (function testValidatePageEnvelopeRejectsMissingSource() {
