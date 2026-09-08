@@ -1,12 +1,12 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Proxy Extension</title>
+    <title>Proxy</title>
     <meta
       name="description"
-      content="Proxy Extension is a Chrome MV3 proxy for CORS-related request issues with a direct package download and installation guide."
+      content="Proxy is a Chrome MV3 proxy for CORS-related request issues with a direct package download and installation guide."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,7 +20,7 @@
   <body>
     <div class="site">
       <header class="topbar">
-        <a class="brand" href="#top" data-i18n="brand">Proxy Extension</a>
+        <a class="brand" href="#top" data-i18n="brand">Proxy</a>
         <div class="topbar-actions">
           <nav class="topnav" aria-label="Primary" data-i18n-attr="aria-label:navAriaLabel">
             <a href="#download" data-i18n="navDownload">Download</a>
@@ -40,7 +40,7 @@
               <option value="eu">Euskara</option>
             </select>
           </label>
-          <span class="version-chip">v0.1.0</span>
+          <span class="version-chip">v0.2.4</span>
         </div>
       </header>
 
@@ -50,7 +50,7 @@
             <p class="kicker" data-i18n="heroKicker">Chrome MV3 proxy</p>
             <h1 data-i18n="heroTitle">Resolve browser-side CORS blockers with a direct extension bridge.</h1>
             <p class="lead" data-i18n="heroLead">
-              Proxy Extension forwards requests through a Chrome service worker so your frontend can reach blocked endpoints while usage stays limited to gallego.top, subdomains of gallego.top, and local development pages.
+              Proxy forwards requests through a Chrome service worker so your frontend can reach blocked endpoints while usage stays limited to gallego.top, subdomains of gallego.top, and local development pages.
             </p>
             <div class="hero-actions">
               <a class="button button-primary" href="./downloads/proxy-extension.zip" download data-i18n="heroPrimaryCta">Download package</a>
@@ -69,7 +69,7 @@
             </div>
             <div class="meta-row">
               <span class="meta-label" data-i18n="metaTargetsLabel">Target hosts</span>
-              <strong data-i18n="metaTargetsValue">Any HTTP or HTTPS endpoint</strong>
+              <strong data-i18n="metaTargetsValue">HTTP/HTTPS endpoints; private network requires permission</strong>
             </div>
           </aside>
         </section>
@@ -125,11 +125,11 @@
           </div>
           <div class="scope-grid">
             <div class="scope-copy">
-              <p data-i18n="scopeParagraph1">The extension can call any http or https endpoint, which keeps it usable across different Moodle deployments and other services without repackaging.</p>
-              <p data-i18n="scopeParagraph2">The restriction is on who can use it. The bridge only accepts callers from gallego.top, *.gallego.top, localhost, and 127.0.0.1.</p>
+              <p data-i18n="scopeParagraph1">The extension can call HTTP or HTTPS endpoints covered by its host permissions. Private-network targets require both an enabled origin policy and an explicit request flag.</p>
+              <p data-i18n="scopeParagraph2">The restriction is on who can use it. The bridge only accepts enabled callers from configured origin policies and the built-in trusted page matches.</p>
             </div>
             <ul class="scope-list">
-              <li data-i18n="scopeList1">Includes credentials for cookie-backed sessions.</li>
+              <li data-i18n="scopeList1">Uses token-based authentication without browser cookies.</li>
               <li data-i18n="scopeList2">Rejects unsupported protocols.</li>
               <li data-i18n="scopeList3">Filters unsafe transport headers.</li>
               <li data-i18n="scopeList4">Validates the sender against the manifest allowlist.</li>
@@ -142,12 +142,14 @@
             <p class="kicker" data-i18n="finalKicker">Ready</p>
             <h2 data-i18n="finalTitle">Download the package and load it directly into Chrome.</h2>
             <p class="muted final-links">
+              <a href="./extension-test.html">Extension test bench</a>
+              <span>·</span>
               <a href="./bridge-client.example.js">Bridge client example</a>
               <span>·</span>
               <a href="../CHANGELOG.md">Changelog</a>
             </p>
           </div>
-          <a class="button button-primary" href="./downloads/proxy-extension.zip" download data-i18n="finalCta">Get Proxy Extension</a>
+          <a class="button button-primary" href="./downloads/proxy-extension.zip" download data-i18n="finalCta">Get Proxy</a>
         </section>
       </main>
     </div>

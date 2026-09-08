@@ -1,21 +1,49 @@
-﻿const BridgeConfig = globalThis.ProxyExtensionBridgeConfig;
+const BridgeConfig = globalThis.ProxyExtensionBridgeConfig;
 const BridgeCore = globalThis.ProxyExtensionBridgeCore;
 const { DEFAULT_SETTINGS, PROTOCOL_NAME, PROTOCOL_VERSION, STORAGE_KEY, VERSION } = BridgeConfig;
 
+const languageOptions = [
+  ["auto", "Automatic"],
+  ["en", "English"],
+  ["es", "Español"],
+  ["fr", "Français"],
+  ["de", "Deutsch"],
+  ["pt", "Português"],
+  ["gl", "Galego"],
+  ["ca", "Català"],
+  ["eu", "Euskara"],
+];
+
 const optionTranslations = {
   en: {
-    title: "Proxy Extension Settings",
-    brand: "Proxy Extension",
+    title: "Proxy Settings",
+    brand: "Proxy",
     optionsTitle: "Bridge settings",
-    intro: "Configure request limits for the extension runtime. Caller page allowlists stay controlled by the manifest.",
+    intro: "Configure request limits, languages, and pages that can use the bridge.",
     versionLabel: "Version",
+    siteCountLabel: "Authorized sites",
+    authorizedSitesTitle: "Authorized sites",
+    authorizedSitesHelp: "Add Chrome match patterns for pages allowed to call the bridge.",
+    allowedSiteLabel: "Site match pattern",
+    allowedSiteHint: "Use patterns such as https://example.com/* or http://localhost/*.",
+    addSiteButton: "Add site",
+    customSitesTitle: "Custom authorized sites",
+    manifestSitesTitle: "Built-in sites",
+    emptyCustomSites: "No custom sites yet.",
+    enabled: "Enabled",
+    localNetworkAccess: "Local network",
+    removeSiteDisabled: "Built-in",
+    removeSite: "Remove",
+    policyChanged: "Policy changed. Save settings to apply it.",
+    languageTitle: "Language",
+    languageLabel: "Interface language",
     runtimeLimitsTitle: "Runtime limits",
     requestTimeoutLabel: "Request timeout (ms)",
     maxBodyLabel: "Max request body size (bytes)",
+    maxResponseLabel: "Max response body size (bytes)",
     allowedMethodsLabel: "Allowed HTTP methods",
     saveButton: "Save settings",
     resetButton: "Reset defaults",
-    allowedCallersTitle: "Allowed caller pages",
     bridgeProtocolTitle: "Bridge protocol",
     protocolLabel: "Protocol:",
     protocolVersionLabel: "Version:",
@@ -23,162 +51,288 @@ const optionTranslations = {
     saved: "Settings saved.",
     reset: "Defaults restored.",
     saveError: "Failed to save settings.",
+    invalidPattern: "Enter a valid Chrome match pattern.",
+    duplicatePattern: "That site is already authorized.",
+    siteAdded: "Site added. Save settings to apply it.",
+    siteRemoved: "Site removed. Save settings to apply the change.",
   },
   es: {
-    title: "Configuración de Proxy Extension",
-    brand: "Proxy Extension",
+    title: "Configuración de Proxy",
+    brand: "Proxy",
     optionsTitle: "Configuración del bridge",
-    intro: "Configura los límites de petición del runtime de la extensión. La allowlist de páginas autorizadas sigue controlada por el manifiesto.",
+    intro: "Configura límites, idioma y páginas que pueden usar el bridge.",
     versionLabel: "Versión",
+    siteCountLabel: "Sitios autorizados",
+    authorizedSitesTitle: "Sitios autorizados",
+    authorizedSitesHelp: "Añade patrones de Chrome para páginas autorizadas a llamar al bridge.",
+    allowedSiteLabel: "Patrón del sitio",
+    allowedSiteHint: "Usa patrones como https://example.com/* o http://localhost/*.",
+    addSiteButton: "Añadir sitio",
+    customSitesTitle: "Sitios personalizados",
+    manifestSitesTitle: "Sitios incluidos",
+    emptyCustomSites: "Aún no hay sitios personalizados.",
+    removeSite: "Eliminar",
+    languageTitle: "Idioma",
+    languageLabel: "Idioma de la interfaz",
     runtimeLimitsTitle: "Límites de ejecución",
     requestTimeoutLabel: "Tiempo máximo de petición (ms)",
-    maxBodyLabel: "Tamaño máximo del cuerpo de la petición (bytes)",
+    maxBodyLabel: "Tamaño máximo de petición (bytes)",
+    maxResponseLabel: "Tamaño máximo de respuesta (bytes)",
     allowedMethodsLabel: "Métodos HTTP permitidos",
     saveButton: "Guardar configuración",
-    resetButton: "Restaurar valores por defecto",
-    allowedCallersTitle: "Páginas autorizadas",
+    resetButton: "Restaurar valores",
     bridgeProtocolTitle: "Protocolo del bridge",
     protocolLabel: "Protocolo:",
     protocolVersionLabel: "Versión:",
-    storageKeyLabel: "Clave de almacenamiento:",
+    storageKeyLabel: "Clave:",
     saved: "Configuración guardada.",
     reset: "Valores por defecto restaurados.",
     saveError: "No se pudo guardar la configuración.",
-  },
-  gl: {
-    title: "Configuración de Proxy Extension",
-    brand: "Proxy Extension",
-    optionsTitle: "Configuración da ponte",
-    intro: "Configura os límites de petición do runtime da extensión. A allowlist de páxinas autorizadas segue controlada polo manifesto.",
-    versionLabel: "Versión",
-    runtimeLimitsTitle: "Límites de execución",
-    requestTimeoutLabel: "Tempo máximo da petición (ms)",
-    maxBodyLabel: "Tamaño máximo do corpo da petición (bytes)",
-    allowedMethodsLabel: "Métodos HTTP permitidos",
-    saveButton: "Gardar configuración",
-    resetButton: "Restaurar valores por defecto",
-    allowedCallersTitle: "Páxinas autorizadas",
-    bridgeProtocolTitle: "Protocolo da ponte",
-    protocolLabel: "Protocolo:",
-    protocolVersionLabel: "Versión:",
-    storageKeyLabel: "Clave de almacenamento:",
-    saved: "Configuración gardada.",
-    reset: "Valores por defecto restaurados.",
-    saveError: "Non se puido gardar a configuración.",
+    invalidPattern: "Introduce un patrón de Chrome válido.",
+    duplicatePattern: "Ese sitio ya está autorizado.",
+    siteAdded: "Sitio añadido. Guarda para aplicarlo.",
+    siteRemoved: "Sitio eliminado. Guarda para aplicar el cambio.",
   },
   fr: {
-    title: "Paramètres de Proxy Extension",
-    brand: "Proxy Extension",
+    title: "Paramètres de Proxy",
+    brand: "Proxy",
     optionsTitle: "Paramètres du bridge",
-    intro: "Configurez les limites de requête du runtime de l'extension. La liste autorisée des pages appelantes reste contrôlée par le manifeste.",
+    intro: "Configurez les limites, la langue et les pages autorisées à utiliser le bridge.",
     versionLabel: "Version",
+    siteCountLabel: "Sites autorisés",
+    authorizedSitesTitle: "Sites autorisés",
+    authorizedSitesHelp: "Ajoutez des motifs Chrome pour les pages autorisées à appeler le bridge.",
+    allowedSiteLabel: "Motif du site",
+    allowedSiteHint: "Utilisez des motifs comme https://example.com/* ou http://localhost/*.",
+    addSiteButton: "Ajouter",
+    customSitesTitle: "Sites personnalisés",
+    manifestSitesTitle: "Sites intégrés",
+    emptyCustomSites: "Aucun site personnalisé.",
+    removeSite: "Supprimer",
+    languageTitle: "Langue",
+    languageLabel: "Langue de l'interface",
     runtimeLimitsTitle: "Limites d'exécution",
-    requestTimeoutLabel: "Délai maximal de requête (ms)",
-    maxBodyLabel: "Taille maximale du corps de requête (octets)",
+    requestTimeoutLabel: "Délai de requête (ms)",
+    maxBodyLabel: "Taille maximale de requête (octets)",
+    maxResponseLabel: "Taille maximale de réponse (octets)",
     allowedMethodsLabel: "Méthodes HTTP autorisées",
-    saveButton: "Enregistrer les paramètres",
-    resetButton: "Restaurer les valeurs par défaut",
-    allowedCallersTitle: "Pages autorisées",
+    saveButton: "Enregistrer",
+    resetButton: "Réinitialiser",
     bridgeProtocolTitle: "Protocole du bridge",
     protocolLabel: "Protocole :",
     protocolVersionLabel: "Version :",
-    storageKeyLabel: "Clé de stockage :",
+    storageKeyLabel: "Clé :",
     saved: "Paramètres enregistrés.",
     reset: "Valeurs par défaut restaurées.",
     saveError: "Impossible d'enregistrer les paramètres.",
+    invalidPattern: "Saisissez un motif Chrome valide.",
+    duplicatePattern: "Ce site est déjà autorisé.",
+    siteAdded: "Site ajouté. Enregistrez pour l'appliquer.",
+    siteRemoved: "Site supprimé. Enregistrez pour appliquer le changement.",
   },
   de: {
-    title: "Proxy Extension Einstellungen",
-    brand: "Proxy Extension",
+    title: "Proxy Einstellungen",
+    brand: "Proxy",
     optionsTitle: "Bridge-Einstellungen",
-    intro: "Konfiguriere die Anfragegrenzen der Erweiterung. Die Allowlist der aufrufenden Seiten bleibt im Manifest definiert.",
+    intro: "Konfiguriere Limits, Sprache und Seiten, die die Bridge nutzen dürfen.",
     versionLabel: "Version",
-    runtimeLimitsTitle: "Laufzeitgrenzen",
+    siteCountLabel: "Erlaubte Seiten",
+    authorizedSitesTitle: "Erlaubte Seiten",
+    authorizedSitesHelp: "Füge Chrome-Match-Patterns für Seiten hinzu, die die Bridge aufrufen dürfen.",
+    allowedSiteLabel: "Seitenmuster",
+    allowedSiteHint: "Nutze Muster wie https://example.com/* oder http://localhost/*.",
+    addSiteButton: "Hinzufügen",
+    customSitesTitle: "Eigene Seiten",
+    manifestSitesTitle: "Integrierte Seiten",
+    emptyCustomSites: "Noch keine eigenen Seiten.",
+    removeSite: "Entfernen",
+    languageTitle: "Sprache",
+    languageLabel: "Oberflächensprache",
+    runtimeLimitsTitle: "Laufzeitlimits",
     requestTimeoutLabel: "Anfrage-Timeout (ms)",
-    maxBodyLabel: "Maximale Request-Body-Größe (Bytes)",
+    maxBodyLabel: "Maximale Anfragegröße (Bytes)",
+    maxResponseLabel: "Maximale Antwortgröße (Bytes)",
     allowedMethodsLabel: "Erlaubte HTTP-Methoden",
-    saveButton: "Einstellungen speichern",
-    resetButton: "Standardwerte wiederherstellen",
-    allowedCallersTitle: "Erlaubte Seiten",
+    saveButton: "Speichern",
+    resetButton: "Zurücksetzen",
     bridgeProtocolTitle: "Bridge-Protokoll",
     protocolLabel: "Protokoll:",
     protocolVersionLabel: "Version:",
-    storageKeyLabel: "Speicherschlüssel:",
+    storageKeyLabel: "Schlüssel:",
     saved: "Einstellungen gespeichert.",
     reset: "Standardwerte wiederhergestellt.",
     saveError: "Einstellungen konnten nicht gespeichert werden.",
+    invalidPattern: "Gib ein gültiges Chrome-Match-Pattern ein.",
+    duplicatePattern: "Diese Seite ist bereits erlaubt.",
+    siteAdded: "Seite hinzugefügt. Speichern, um sie zu aktivieren.",
+    siteRemoved: "Seite entfernt. Speichern, um die Änderung zu aktivieren.",
   },
   pt: {
-    title: "Definições do Proxy Extension",
-    brand: "Proxy Extension",
+    title: "Definições do Proxy",
+    brand: "Proxy",
     optionsTitle: "Definições da bridge",
-    intro: "Configura os limites de pedido do runtime da extensão. A allowlist das páginas autorizadas continua controlada pelo manifesto.",
+    intro: "Configura limites, idioma e páginas que podem usar a bridge.",
     versionLabel: "Versão",
+    siteCountLabel: "Sites autorizados",
+    authorizedSitesTitle: "Sites autorizados",
+    authorizedSitesHelp: "Adiciona padrões Chrome para páginas autorizadas a chamar a bridge.",
+    allowedSiteLabel: "Padrão do site",
+    allowedSiteHint: "Usa padrões como https://example.com/* ou http://localhost/*.",
+    addSiteButton: "Adicionar",
+    customSitesTitle: "Sites personalizados",
+    manifestSitesTitle: "Sites incluídos",
+    emptyCustomSites: "Ainda não há sites personalizados.",
+    removeSite: "Remover",
+    languageTitle: "Idioma",
+    languageLabel: "Idioma da interface",
     runtimeLimitsTitle: "Limites de execução",
     requestTimeoutLabel: "Tempo limite do pedido (ms)",
-    maxBodyLabel: "Tamanho máximo do corpo do pedido (bytes)",
+    maxBodyLabel: "Tamanho máximo do pedido (bytes)",
+    maxResponseLabel: "Tamanho máximo da resposta (bytes)",
     allowedMethodsLabel: "Métodos HTTP permitidos",
-    saveButton: "Guardar definições",
-    resetButton: "Repor valores predefinidos",
-    allowedCallersTitle: "Páginas autorizadas",
+    saveButton: "Guardar",
+    resetButton: "Repor",
     bridgeProtocolTitle: "Protocolo da bridge",
     protocolLabel: "Protocolo:",
     protocolVersionLabel: "Versão:",
-    storageKeyLabel: "Chave de armazenamento:",
+    storageKeyLabel: "Chave:",
     saved: "Definições guardadas.",
     reset: "Valores predefinidos repostos.",
     saveError: "Não foi possível guardar as definições.",
+    invalidPattern: "Introduz um padrão Chrome válido.",
+    duplicatePattern: "Esse site já está autorizado.",
+    siteAdded: "Site adicionado. Guarda para aplicar.",
+    siteRemoved: "Site removido. Guarda para aplicar a alteração.",
+  },
+  gl: {
+    title: "Configuración de Proxy",
+    brand: "Proxy",
+    optionsTitle: "Configuración da ponte",
+    intro: "Configura límites, idioma e páxinas que poden usar a ponte.",
+    versionLabel: "Versión",
+    siteCountLabel: "Sitios autorizados",
+    authorizedSitesTitle: "Sitios autorizados",
+    authorizedSitesHelp: "Engade patróns de Chrome para páxinas autorizadas a chamar á ponte.",
+    allowedSiteLabel: "Patrón do sitio",
+    allowedSiteHint: "Usa patróns como https://example.com/* ou http://localhost/*.",
+    addSiteButton: "Engadir",
+    customSitesTitle: "Sitios personalizados",
+    manifestSitesTitle: "Sitios incluídos",
+    emptyCustomSites: "Aínda non hai sitios personalizados.",
+    removeSite: "Eliminar",
+    languageTitle: "Idioma",
+    languageLabel: "Idioma da interface",
+    runtimeLimitsTitle: "Límites de execución",
+    requestTimeoutLabel: "Tempo máximo da petición (ms)",
+    maxBodyLabel: "Tamaño máximo da petición (bytes)",
+    maxResponseLabel: "Tamaño máximo da resposta (bytes)",
+    allowedMethodsLabel: "Métodos HTTP permitidos",
+    saveButton: "Gardar",
+    resetButton: "Restaurar",
+    bridgeProtocolTitle: "Protocolo da ponte",
+    protocolLabel: "Protocolo:",
+    protocolVersionLabel: "Versión:",
+    storageKeyLabel: "Clave:",
+    saved: "Configuración gardada.",
+    reset: "Valores por defecto restaurados.",
+    saveError: "Non se puido gardar a configuración.",
+    invalidPattern: "Introduce un patrón de Chrome válido.",
+    duplicatePattern: "Ese sitio xa está autorizado.",
+    siteAdded: "Sitio engadido. Garda para aplicalo.",
+    siteRemoved: "Sitio eliminado. Garda para aplicar o cambio.",
   },
   ca: {
-    title: "Configuració de Proxy Extension",
-    brand: "Proxy Extension",
+    title: "Configuració de Proxy",
+    brand: "Proxy",
     optionsTitle: "Configuració del bridge",
-    intro: "Configura els límits de petició del runtime de l'extensió. L'allowlist de pàgines autoritzades continua controlada pel manifest.",
+    intro: "Configura límits, idioma i pàgines que poden utilitzar el bridge.",
     versionLabel: "Versió",
+    siteCountLabel: "Llocs autoritzats",
+    authorizedSitesTitle: "Llocs autoritzats",
+    authorizedSitesHelp: "Afegeix patrons de Chrome per a pàgines autoritzades a cridar el bridge.",
+    allowedSiteLabel: "Patró del lloc",
+    allowedSiteHint: "Fes servir patrons com https://example.com/* o http://localhost/*.",
+    addSiteButton: "Afegeix",
+    customSitesTitle: "Llocs personalitzats",
+    manifestSitesTitle: "Llocs inclosos",
+    emptyCustomSites: "Encara no hi ha llocs personalitzats.",
+    removeSite: "Elimina",
+    languageTitle: "Idioma",
+    languageLabel: "Idioma de la interfície",
     runtimeLimitsTitle: "Límits d'execució",
-    requestTimeoutLabel: "Temps màxim de la petició (ms)",
-    maxBodyLabel: "Mida màxima del cos de la petició (bytes)",
+    requestTimeoutLabel: "Temps màxim de petició (ms)",
+    maxBodyLabel: "Mida màxima de petició (bytes)",
+    maxResponseLabel: "Mida màxima de resposta (bytes)",
     allowedMethodsLabel: "Mètodes HTTP permesos",
-    saveButton: "Desa la configuració",
-    resetButton: "Restaura els valors per defecte",
-    allowedCallersTitle: "Pàgines autoritzades",
+    saveButton: "Desa",
+    resetButton: "Restaura",
     bridgeProtocolTitle: "Protocol del bridge",
     protocolLabel: "Protocol:",
     protocolVersionLabel: "Versió:",
-    storageKeyLabel: "Clau d'emmagatzematge:",
+    storageKeyLabel: "Clau:",
     saved: "Configuració desada.",
     reset: "Valors per defecte restaurats.",
     saveError: "No s'ha pogut desar la configuració.",
+    invalidPattern: "Introdueix un patró de Chrome vàlid.",
+    duplicatePattern: "Aquest lloc ja està autoritzat.",
+    siteAdded: "Lloc afegit. Desa per aplicar-lo.",
+    siteRemoved: "Lloc eliminat. Desa per aplicar el canvi.",
   },
   eu: {
-    title: "Proxy Extension ezarpenak",
-    brand: "Proxy Extension",
+    title: "Proxy ezarpenak",
+    brand: "Proxy",
     optionsTitle: "Zubiaren ezarpenak",
-    intro: "Konfiguratu luzapenaren runtime-eko eskaera mugak. Baimendutako orrien allowlist-a manifestuak kontrolatzen jarraitzen du.",
+    intro: "Konfiguratu mugak, hizkuntza eta zubia erabil dezaketen orriak.",
     versionLabel: "Bertsioa",
+    siteCountLabel: "Baimendutako guneak",
+    authorizedSitesTitle: "Baimendutako guneak",
+    authorizedSitesHelp: "Gehitu Chrome ereduak zubia deitu dezaketen orrietarako.",
+    allowedSiteLabel: "Gunearen eredua",
+    allowedSiteHint: "Erabili https://example.com/* edo http://localhost/* bezalako ereduak.",
+    addSiteButton: "Gehitu",
+    customSitesTitle: "Gune pertsonalizatuak",
+    manifestSitesTitle: "Barneko guneak",
+    emptyCustomSites: "Oraindik ez dago gune pertsonalizaturik.",
+    removeSite: "Kendu",
+    languageTitle: "Hizkuntza",
+    languageLabel: "Interfazearen hizkuntza",
     runtimeLimitsTitle: "Exekuzio mugak",
     requestTimeoutLabel: "Eskaeraren denbora-muga (ms)",
-    maxBodyLabel: "Eskaeraren gorputzaren gehieneko tamaina (byte)",
+    maxBodyLabel: "Eskaeraren gehieneko tamaina (byte)",
+    maxResponseLabel: "Erantzunaren gehieneko tamaina (byte)",
     allowedMethodsLabel: "Baimendutako HTTP metodoak",
-    saveButton: "Gorde ezarpenak",
-    resetButton: "Leheneratu balio lehenetsiak",
-    allowedCallersTitle: "Baimendutako orriak",
+    saveButton: "Gorde",
+    resetButton: "Berrezarri",
     bridgeProtocolTitle: "Zubiaren protokoloa",
     protocolLabel: "Protokoloa:",
     protocolVersionLabel: "Bertsioa:",
-    storageKeyLabel: "Biltegiratze-gakoa:",
+    storageKeyLabel: "Gakoa:",
     saved: "Ezarpenak gorde dira.",
-    reset: "Balio lehenetsiak leheneratu dira.",
+    reset: "Balio lehenetsiak berrezarri dira.",
     saveError: "Ezin izan dira ezarpenak gorde.",
+    invalidPattern: "Sartu baliozko Chrome eredua.",
+    duplicatePattern: "Gune hori dagoeneko baimenduta dago.",
+    siteAdded: "Gunea gehitu da. Gorde aplikatzeko.",
+    siteRemoved: "Gunea kendu da. Gorde aldaketa aplikatzeko.",
   },
 };
 
+let activeSettings = BridgeCore.normalizeSettings(DEFAULT_SETTINGS);
+let dictionary = optionTranslations.en;
+
 const timeoutInput = document.getElementById("request-timeout-ms");
 const maxBodyInput = document.getElementById("max-body-bytes");
+const maxResponseInput = document.getElementById("max-response-bytes");
 const methodsContainer = document.getElementById("allowed-methods");
 const statusMessage = document.getElementById("status-message");
 const form = document.getElementById("settings-form");
 const resetButton = document.getElementById("reset-button");
+const languageSelect = document.getElementById("ui-language");
+const siteInput = document.getElementById("allowed-site-input");
+const addSiteButton = document.getElementById("add-site-button");
+const customSitesList = document.getElementById("custom-sites");
+const manifestSitesList = document.getElementById("manifest-sites");
+const siteCount = document.getElementById("site-count");
 
 function normalizeLocale(input) {
   const value = String(input || "").trim().toLowerCase();
@@ -186,15 +340,24 @@ function normalizeLocale(input) {
   return optionTranslations[languagePart] ? languagePart : "en";
 }
 
-function getDictionary() {
-  const language = typeof chrome.i18n !== "undefined" && chrome.i18n.getUILanguage
+function getBrowserLanguage() {
+  return typeof chrome.i18n !== "undefined" && chrome.i18n.getUILanguage
     ? chrome.i18n.getUILanguage()
     : navigator.language;
-  return optionTranslations[normalizeLocale(language)] || optionTranslations.en;
 }
 
-const dictionary = getDictionary();
-document.title = dictionary.title;
+function getDictionary(language) {
+  const selectedLanguage = language === "auto" ? getBrowserLanguage() : language;
+  return optionTranslations[normalizeLocale(selectedLanguage)] || optionTranslations.en;
+}
+
+function t(key) {
+  return dictionary[key] || optionTranslations.en[key] || key;
+}
+
+function isDefaultPolicyOrigin(origin) {
+  return Object.prototype.hasOwnProperty.call(DEFAULT_SETTINGS.originPolicies || {}, origin);
+}
 
 function setText(id, value) {
   const element = document.getElementById(id);
@@ -204,17 +367,31 @@ function setText(id, value) {
 }
 
 function applyTranslations() {
+  dictionary = getDictionary(activeSettings.uiLanguage);
+  document.documentElement.lang = normalizeLocale(activeSettings.uiLanguage === "auto" ? getBrowserLanguage() : activeSettings.uiLanguage);
+  document.title = dictionary.title;
+
   setText("options-brand", dictionary.brand);
   setText("options-title", dictionary.optionsTitle);
   setText("options-intro", dictionary.intro);
   setText("version-label", dictionary.versionLabel);
+  setText("site-count-label", dictionary.siteCountLabel);
+  setText("authorized-sites-title", dictionary.authorizedSitesTitle);
+  setText("authorized-sites-help", dictionary.authorizedSitesHelp);
+  setText("allowed-site-label", dictionary.allowedSiteLabel);
+  setText("allowed-site-hint", dictionary.allowedSiteHint);
+  setText("add-site-button", dictionary.addSiteButton);
+  setText("custom-sites-title", dictionary.customSitesTitle);
+  setText("manifest-sites-title", dictionary.manifestSitesTitle);
+  setText("language-title", dictionary.languageTitle);
+  setText("language-label", dictionary.languageLabel);
   setText("runtime-limits-title", dictionary.runtimeLimitsTitle);
   setText("request-timeout-label", dictionary.requestTimeoutLabel);
   setText("max-body-label", dictionary.maxBodyLabel);
+  setText("max-response-label", dictionary.maxResponseLabel);
   setText("allowed-methods-label", dictionary.allowedMethodsLabel);
   setText("save-button", dictionary.saveButton);
   setText("reset-button", dictionary.resetButton);
-  setText("allowed-callers-title", dictionary.allowedCallersTitle);
   setText("bridge-protocol-title", dictionary.bridgeProtocolTitle);
   setText("protocol-label", dictionary.protocolLabel);
   setText("protocol-version-label", dictionary.protocolVersionLabel);
@@ -226,7 +403,23 @@ document.getElementById("protocol-name").textContent = PROTOCOL_NAME;
 document.getElementById("protocol-version").textContent = String(PROTOCOL_VERSION);
 document.getElementById("storage-key").textContent = STORAGE_KEY;
 
-function renderMethodCheckboxes(settings) {
+function getManifestPagePatterns() {
+  const manifest = chrome.runtime.getManifest();
+  return manifest.content_scripts ? manifest.content_scripts.flatMap((entry) => entry.matches || []) : [];
+}
+
+function renderLanguageOptions() {
+  languageSelect.innerHTML = "";
+  languageOptions.forEach(([value, label]) => {
+    const option = document.createElement("option");
+    option.value = value;
+    option.textContent = value === "auto" ? `${label} (${normalizeLocale(getBrowserLanguage()).toUpperCase()})` : label;
+    option.selected = activeSettings.uiLanguage === value;
+    languageSelect.appendChild(option);
+  });
+}
+
+function renderMethodCheckboxes() {
   methodsContainer.innerHTML = "";
   DEFAULT_SETTINGS.allowedMethods.forEach((method) => {
     const label = document.createElement("label");
@@ -236,7 +429,7 @@ function renderMethodCheckboxes(settings) {
     input.type = "checkbox";
     input.name = "allowedMethods";
     input.value = method;
-    input.checked = settings.allowedMethods.includes(method);
+    input.checked = activeSettings.allowedMethods.includes(method);
 
     const text = document.createElement("span");
     text.textContent = method;
@@ -246,10 +439,74 @@ function renderMethodCheckboxes(settings) {
   });
 }
 
+function renderManifestSites() {
+  manifestSitesList.innerHTML = "";
+  getManifestPagePatterns().forEach((page) => {
+    const item = document.createElement("li");
+    item.textContent = page;
+    manifestSitesList.appendChild(item);
+  });
+}
+
+function renderCustomSites() {
+  customSitesList.innerHTML = "";
+  const policies = Object.values(activeSettings.originPolicies || {}).sort((left, right) => left.origin.localeCompare(right.origin));
+
+  if (!policies.length) {
+    const emptyItem = document.createElement("li");
+    emptyItem.className = "empty-state";
+    emptyItem.textContent = t("emptyCustomSites");
+    customSitesList.appendChild(emptyItem);
+  }
+
+  policies.forEach((policy) => {
+    const item = document.createElement("li");
+    item.className = "policy-item";
+    const code = document.createElement("code");
+    const controls = document.createElement("div");
+    const enabledLabel = document.createElement("label");
+    const enabledInput = document.createElement("input");
+    const privateLabel = document.createElement("label");
+    const privateInput = document.createElement("input");
+    const button = document.createElement("button");
+
+    code.textContent = policy.origin;
+    controls.className = "policy-controls";
+    enabledLabel.className = "inline-check";
+    enabledInput.type = "checkbox";
+    enabledInput.checked = policy.enabled !== false;
+    enabledInput.dataset.policyFlag = `${policy.origin}:enabled`;
+    enabledLabel.append(enabledInput, document.createTextNode(t("enabled")));
+
+    privateLabel.className = "inline-check";
+    privateInput.type = "checkbox";
+    privateInput.checked = policy.localNetworkAccess === true;
+    privateInput.dataset.policyFlag = `${policy.origin}:localNetworkAccess`;
+    privateLabel.append(privateInput, document.createTextNode(t("localNetworkAccess")));
+
+    button.type = "button";
+    button.className = "text-button";
+    button.dataset.removePolicyOrigin = policy.origin;
+    button.disabled = isDefaultPolicyOrigin(policy.origin);
+    button.textContent = button.disabled ? t("removeSiteDisabled") : t("removeSite");
+
+    controls.append(enabledLabel, privateLabel, button);
+    item.append(code, controls);
+    customSitesList.appendChild(item);
+  });
+
+  siteCount.textContent = String(policies.filter((policy) => policy.enabled !== false).length);
+}
+
 function fillForm(settings) {
-  timeoutInput.value = String(settings.requestTimeoutMs);
-  maxBodyInput.value = String(settings.maxBodyBytes);
-  renderMethodCheckboxes(settings);
+  activeSettings = BridgeCore.normalizeSettings(settings);
+  timeoutInput.value = String(activeSettings.requestTimeoutMs);
+  maxBodyInput.value = String(activeSettings.maxBodyBytes);
+  maxResponseInput.value = String(activeSettings.maxResponseBytes);
+  renderLanguageOptions();
+  renderMethodCheckboxes();
+  renderManifestSites();
+  renderCustomSites();
 }
 
 async function loadSettings() {
@@ -266,7 +523,11 @@ function readFormSettings() {
   return BridgeCore.normalizeSettings({
     requestTimeoutMs: Number(timeoutInput.value),
     maxBodyBytes: Number(maxBodyInput.value),
+    maxResponseBytes: Number(maxResponseInput.value),
     allowedMethods,
+    allowedPagePatterns: activeSettings.allowedPagePatterns,
+    originPolicies: activeSettings.originPolicies,
+    uiLanguage: languageSelect.value,
   });
 }
 
@@ -275,16 +536,38 @@ function setStatus(message, isError) {
   statusMessage.dataset.state = isError ? "error" : "success";
 }
 
-function renderCallerPages() {
-  const list = document.getElementById("caller-pages");
-  list.innerHTML = "";
-  const manifest = chrome.runtime.getManifest();
-  const pages = manifest.content_scripts ? manifest.content_scripts.flatMap((entry) => entry.matches || []) : [];
-  pages.forEach((page) => {
-    const item = document.createElement("li");
-    item.textContent = page;
-    list.appendChild(item);
-  });
+function addSitePattern() {
+  const pattern = siteInput.value.trim();
+  const normalized = BridgeCore.normalizeAllowedPagePatterns([pattern]);
+
+  if (!normalized.length) {
+    setStatus(dictionary.invalidPattern, true);
+    return;
+  }
+
+  const origin = BridgeCore.extractAuthorizedSiteFromPattern(normalized[0]);
+  if (!origin) {
+    setStatus(dictionary.invalidPattern, true);
+    return;
+  }
+
+  if (activeSettings.originPolicies[origin]) {
+    setStatus(dictionary.duplicatePattern, true);
+    return;
+  }
+
+  activeSettings.allowedPagePatterns = activeSettings.allowedPagePatterns.concat(normalized[0]);
+  activeSettings.originPolicies = {
+    ...activeSettings.originPolicies,
+    [origin]: {
+      origin,
+      enabled: true,
+      localNetworkAccess: false,
+    },
+  };
+  siteInput.value = "";
+  renderCustomSites();
+  setStatus(dictionary.siteAdded, false);
 }
 
 form.addEventListener("submit", async (event) => {
@@ -292,6 +575,8 @@ form.addEventListener("submit", async (event) => {
   try {
     const settings = readFormSettings();
     await saveSettings(settings);
+    activeSettings = settings;
+    applyTranslations();
     fillForm(settings);
     setStatus(dictionary.saved, false);
   } catch (error) {
@@ -302,12 +587,72 @@ form.addEventListener("submit", async (event) => {
 resetButton.addEventListener("click", async () => {
   const defaults = BridgeCore.normalizeSettings(DEFAULT_SETTINGS);
   await saveSettings(defaults);
+  activeSettings = defaults;
+  applyTranslations();
   fillForm(defaults);
   setStatus(dictionary.reset, false);
 });
 
-applyTranslations();
+languageSelect.addEventListener("change", () => {
+  activeSettings = readFormSettings();
+  applyTranslations();
+  renderLanguageOptions();
+  renderCustomSites();
+  setStatus("", false);
+});
+
+addSiteButton.addEventListener("click", addSitePattern);
+siteInput.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    addSitePattern();
+  }
+});
+
+customSitesList.addEventListener("change", (event) => {
+  const input = event.target.closest("[data-policy-flag]");
+  if (!input) {
+    return;
+  }
+
+  const [origin, flag] = input.dataset.policyFlag.split(":");
+  const policy = activeSettings.originPolicies[origin];
+  if (!policy) {
+    return;
+  }
+
+  activeSettings.originPolicies = {
+    ...activeSettings.originPolicies,
+    [origin]: {
+      ...policy,
+      [flag]: input.checked,
+    },
+  };
+  renderCustomSites();
+  setStatus(t("policyChanged"), false);
+});
+
+customSitesList.addEventListener("click", (event) => {
+  const button = event.target.closest("[data-remove-policy-origin]");
+  if (!button) {
+    return;
+  }
+
+  const origin = button.dataset.removePolicyOrigin;
+  if (isDefaultPolicyOrigin(origin)) {
+    return;
+  }
+
+  activeSettings.allowedPagePatterns = activeSettings.allowedPagePatterns.filter((pattern) => BridgeCore.extractAuthorizedSiteFromPattern(pattern) !== origin);
+  const nextPolicies = { ...activeSettings.originPolicies };
+  delete nextPolicies[origin];
+  activeSettings.originPolicies = nextPolicies;
+  renderCustomSites();
+  setStatus(dictionary.siteRemoved, false);
+});
+
 (async () => {
-  fillForm(await loadSettings());
-  renderCallerPages();
+  activeSettings = await loadSettings();
+  applyTranslations();
+  fillForm(activeSettings);
 })();

@@ -1,8 +1,8 @@
 {
   "appName": {
-    "message": "Proxy Extension"
+    "message": "Proxy"
   },
   "appDescription": {
-    "message": "Extensió proxy per a problemes de sol·licituds relacionats amb CORS."
+    "message": "Bridge controlat per a sol·licituds HTTP cross-origin de pàgines autoritzades."
   }
 }

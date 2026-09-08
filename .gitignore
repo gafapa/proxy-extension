@@ -7,3 +7,10 @@ Thumbs.db
 
 # Node
 node_modules/
+
+# Browser generated extension metadata
+proxy/_metadata/
+
+# Local agent and project-manager metadata
+.agents/
+.claude/

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proxy Privacy Policy</title>
+    <style>
+      body {
+        margin: 0;
+        background: #f4f1ea;
+        color: #171717;
+        font-family: Aptos, "Segoe UI", sans-serif;
+        line-height: 1.6;
+      }
+
+      main {
+        width: min(860px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 48px 0;
+      }
+
+      h1 {
+        margin: 0 0 12px;
+        font-size: clamp(2rem, 5vw, 3.4rem);
+        line-height: 1;
+      }
+
+      h2 {
+        margin: 32px 0 8px;
+      }
+
+      p,
+      li {
+        color: #4f5552;
+      }
+
+      a {
+        color: #0f766e;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Proxy Privacy Policy</h1>
+      <p>Last updated: May 6, 2026</p>
+
+      <h2>Overview</h2>
+      <p>
+        Proxy is a Chrome extension that lets authorized pages send user-initiated HTTP requests through the extension runtime.
+        The extension is designed for controlled development and integration workflows where a web page needs a local browser bridge
+        for cross-origin requests.
+      </p>
+
+      <h2>Data handled by the extension</h2>
+      <p>The extension may process the following data locally in Chrome:</p>
+      <ul>
+        <li>Extension settings, including request limits, interface language, allowed HTTP methods, and authorized page patterns.</li>
+        <li>Request metadata and request bodies provided by an authorized page when the user or calling application starts a bridge request.</li>
+        <li>Response status, headers, and response body returned from the target server for that request.</li>
+      </ul>
+
+      <h2>Storage</h2>
+      <p>
+        Settings are stored with Chrome extension storage. Proxy also stores a local audit trail for the latest 20 requests,
+        including the caller origin, HTTP method, target URL without its query string or fragment, status, size, and timing metadata.
+        Request bodies and response bodies are not stored. Proxy does not create user accounts or maintain an external database.
+      </p>
+
+      <h2>Sharing and transmission</h2>
+      <p>
+        Proxy does not sell, rent, or transfer user data to advertising platforms, data brokers, or analytics providers.
+        Network requests are sent only to the target URL supplied by an authorized page as part of the extension's single purpose.
+      </p>
+
+      <h2>Permissions</h2>
+      <p>
+        The extension requests broad HTTP and HTTPS host access because its user-facing purpose is to perform bridge requests to
+        user-selected web endpoints. Access is limited by the extension's bridge validation, authorized caller pages, configured
+        request limits, and Chrome's extension permission model.
+      </p>
+
+      <h2>Limited Use disclosure</h2>
+      <p>
+        The use of information received from Google APIs will adhere to the Chrome Web Store User Data Policy, including the Limited
+        Use requirements.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        For privacy or support requests, use the support contact configured in the Chrome Web Store developer dashboard for this item.
+      </p>
+    </main>
+  </body>
+</html>

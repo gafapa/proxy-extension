@@ -18,8 +18,22 @@ Provide a standalone Chrome MV3 extension that proxies Moodle HTTP requests for 
 
 ## Components
 
+- `proxy/shared/bridge-config.js`
+  - defines protocol identifiers, message types, storage keys, version information, and default settings
+
+- `proxy/shared/page-bridge.js`
+  - contains only page-envelope validation and error serialization
+  - is loaded by content scripts instead of the larger network request engine
+
+- `proxy/shared/bridge-core.js`
+  - normalizes settings and Chrome match patterns
+  - validates senders, targets, private-network access, headers, methods, bodies, and redirects
+  - reads bounded text and binary responses
+  - is loaded by the service worker and options page, where its full functionality is required
+
 - `proxy/content-script.js`
   - injected into the allowed web app origins
+  - loads a small page-only validation module instead of parsing the network request engine on every page
   - listens for `window.postMessage(...)` requests from the page
   - validates the bridge request shape, protocol name, and protocol version before forwarding it
   - returns responses back to the page with `window.postMessage(...)`
@@ -30,7 +44,9 @@ Provide a standalone Chrome MV3 extension that proxies Moodle HTTP requests for 
   - validates the sender page URL against the configured content script matches
   - validates the destination URL against the configured `host_permissions`
   - validates method, headers, body size, and timeout limits
-  - executes `fetch(...)` with `credentials: "include"` and timeout handling
+  - executes `fetch(...)` with `credentials: "omit"` and timeout handling
+  - follows redirects one hop at a time and validates every destination before connecting
+  - stores metadata for the latest 20 requests in local extension storage without delaying the bridge response
   - serializes status, headers, and body back to the caller
 
 - `proxy/manifest.json`
@@ -58,6 +74,23 @@ Provide a standalone Chrome MV3 extension that proxies Moodle HTTP requests for 
 
 - `docs/downloads/proxy-extension.zip`
   - packaged distribution artifact built from the contents of `proxy/`
+  - contains minified JavaScript while the repository source remains readable
+
+## Runtime Loading
+
+Static and dynamically registered content scripts load `bridge-config.js`, `page-bridge.js`, and `content-script.js`. They do not load `bridge-core.js`. This reduces the page-injected JavaScript source from 33,906 bytes to 12,926 bytes in version `0.2.4`.
+
+The service worker loads `bridge-config.js` and `bridge-core.js` when Chrome starts it for an extension event. The options page loads the same two files only when the user opens settings.
+
+Audit records are written outside the response-critical path, so storage persistence does not add to the time observed by the calling page.
+
+## Packaging
+
+1. `npm install` installs Terser as a development dependency.
+2. `npm run package:extension` copies extension files to a temporary staging directory.
+3. Terser compresses and mangles staged JavaScript files.
+4. The staging directory is archived as `docs/downloads/proxy-extension.zip` and then removed.
+5. `npm test` checks the size limit and executes the packaged shared modules to verify that minification produced valid code.
 
 ## Messaging Flow
 
@@ -72,5 +105,5 @@ Provide a standalone Chrome MV3 extension that proxies Moodle HTTP requests for 
 - Only `http` and `https` URLs are accepted.
 - Allowed destination hosts are any `http` or `https` URL covered by `proxy/manifest.json` `host_permissions`.
 - Allowed caller pages are defined by `proxy/manifest.json` content script `matches`.
-- Cookie-backed Moodle sessions are preserved through `credentials: "include"`.
+- Extension fetches intentionally omit browser cookies. Token-based authentication should be supplied through allowed request headers.
 - Request headers are filtered to prevent page code from setting sensitive transport headers such as `Cookie`, `Host`, `Origin`, or `Referer`.

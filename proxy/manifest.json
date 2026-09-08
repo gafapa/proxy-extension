@@ -1,16 +1,25 @@
 {
   "manifest_version": 3,
   "name": "__MSG_appName__",
-  "version": "0.1.0",
+  "version": "0.2.4",
   "default_locale": "en",
   "description": "__MSG_appDescription__",
-  "permissions": ["storage"],
+  "permissions": ["storage", "scripting"],
   "host_permissions": ["http://*/*", "https://*/*"],
   "icons": {
     "16": "assets/icon16.png",
     "32": "assets/icon32.png",
     "48": "assets/icon48.png",
     "128": "assets/icon128.png"
+  },
+  "action": {
+    "default_title": "__MSG_appName__",
+    "default_icon": {
+      "16": "assets/icon16.png",
+      "32": "assets/icon32.png",
+      "48": "assets/icon48.png",
+      "128": "assets/icon128.png"
+    }
   },
   "background": {
     "service_worker": "service-worker.js"
@@ -29,7 +38,7 @@
         "http://localhost/*",
         "https://localhost/*"
       ],
-      "js": ["shared/bridge-config.js", "shared/bridge-core.js", "content-script.js"],
+      "js": ["shared/bridge-config.js", "shared/page-bridge.js", "content-script.js"],
       "run_at": "document_start"
     }
   ]

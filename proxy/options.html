@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Proxy Extension Settings</title>
+    <title>Proxy Settings</title>
     <link rel="stylesheet" href="./options.css" />
     <script src="./shared/bridge-config.js"></script>
     <script src="./shared/bridge-core.js"></script>
@@ -13,55 +13,108 @@
     <main class="settings-shell">
       <header class="settings-header">
         <div>
-          <p class="eyebrow" id="options-brand">Proxy Extension</p>
+          <p class="eyebrow" id="options-brand">Proxy</p>
           <h1 id="options-title">Bridge settings</h1>
-          <p class="intro" id="options-intro">
-            Configure request limits for the extension runtime. Caller page allowlists stay controlled by the manifest.
-          </p>
+          <p class="intro" id="options-intro">Configure request limits, languages, and pages that can use the bridge.</p>
         </div>
-        <div class="version-card">
+        <div class="status-card" aria-label="Extension status">
           <span id="version-label">Version</span>
-          <strong id="extension-version">0.1.0</strong>
+          <strong id="extension-version">0.2.4</strong>
+          <span id="site-count-label">Authorized sites</span>
+          <strong id="site-count">0</strong>
         </div>
       </header>
 
-      <section class="panel">
-        <h2 id="runtime-limits-title">Runtime limits</h2>
-        <form id="settings-form" class="settings-form">
-          <label>
-            <span id="request-timeout-label">Request timeout (ms)</span>
-            <input id="request-timeout-ms" name="requestTimeoutMs" type="number" min="1000" max="120000" step="1000" required />
-          </label>
-          <label>
-            <span id="max-body-label">Max request body size (bytes)</span>
-            <input id="max-body-bytes" name="maxBodyBytes" type="number" min="1024" max="10485760" step="1024" required />
-          </label>
-          <fieldset>
-            <legend id="allowed-methods-label">Allowed HTTP methods</legend>
-            <div id="allowed-methods" class="checkbox-grid"></div>
-          </fieldset>
+      <form id="settings-form" class="settings-form">
+        <section class="settings-layout" aria-label="Settings sections">
+          <div class="panel panel-primary">
+            <div class="section-heading">
+              <span class="section-index">01</span>
+              <div>
+                <h2 id="authorized-sites-title">Authorized sites</h2>
+                <p id="authorized-sites-help">Add Chrome match patterns for pages allowed to call the bridge.</p>
+              </div>
+            </div>
+
+            <div class="site-adder">
+              <label class="field-block" for="allowed-site-input">
+                <span id="allowed-site-label">Site match pattern</span>
+                <input id="allowed-site-input" name="allowedSitePattern" type="text" placeholder="https://example.com/*" autocomplete="off" />
+              </label>
+              <button type="button" id="add-site-button">Add site</button>
+            </div>
+            <p class="hint" id="allowed-site-hint">Use patterns such as https://example.com/* or http://localhost/*.</p>
+
+            <div class="list-block">
+              <h3 id="custom-sites-title">Custom authorized sites</h3>
+              <ul id="custom-sites" class="site-list"></ul>
+            </div>
+
+            <div class="list-block muted-block">
+              <h3 id="manifest-sites-title">Built-in sites</h3>
+              <ul id="manifest-sites" class="plain-list"></ul>
+            </div>
+          </div>
+
+          <div class="side-stack">
+            <section class="panel">
+              <div class="section-heading compact">
+                <span class="section-index">02</span>
+                <h2 id="language-title">Language</h2>
+              </div>
+              <label class="field-block" for="ui-language">
+                <span id="language-label">Interface language</span>
+                <select id="ui-language" name="uiLanguage"></select>
+              </label>
+            </section>
+
+            <section class="panel">
+              <div class="section-heading compact">
+                <span class="section-index">03</span>
+                <h2 id="runtime-limits-title">Runtime limits</h2>
+              </div>
+              <div class="limits-grid">
+                <label class="field-block">
+                  <span id="request-timeout-label">Request timeout (ms)</span>
+                  <input id="request-timeout-ms" name="requestTimeoutMs" type="number" min="1000" max="120000" step="1000" required />
+                </label>
+                <label class="field-block">
+                  <span id="max-body-label">Max request body size (bytes)</span>
+                  <input id="max-body-bytes" name="maxBodyBytes" type="number" min="1024" max="10485760" step="1024" required />
+                </label>
+                <label class="field-block">
+                  <span id="max-response-label">Max response body size (bytes)</span>
+                  <input id="max-response-bytes" name="maxResponseBytes" type="number" min="1024" max="52428800" step="1024" required />
+                </label>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="panel methods-panel">
+          <div class="section-heading compact">
+            <span class="section-index">04</span>
+            <h2 id="allowed-methods-label">Allowed HTTP methods</h2>
+          </div>
+          <div id="allowed-methods" class="checkbox-grid"></div>
+        </section>
+
+        <section class="panel footer-panel">
+          <div>
+            <h2 id="bridge-protocol-title">Bridge protocol</h2>
+            <ul class="protocol-list">
+              <li><strong id="protocol-label">Protocol:</strong> <span id="protocol-name"></span></li>
+              <li><strong id="protocol-version-label">Version:</strong> <span id="protocol-version"></span></li>
+              <li><strong id="storage-key-label">Storage key:</strong> <span id="storage-key"></span></li>
+            </ul>
+          </div>
           <div class="actions">
             <button type="submit" id="save-button">Save settings</button>
             <button type="button" id="reset-button" class="secondary">Reset defaults</button>
           </div>
           <p id="status-message" class="status-message" aria-live="polite"></p>
-        </form>
-      </section>
-
-      <section class="panel panel-grid">
-        <div>
-          <h2 id="allowed-callers-title">Allowed caller pages</h2>
-          <ul id="caller-pages" class="plain-list"></ul>
-        </div>
-        <div>
-          <h2 id="bridge-protocol-title">Bridge protocol</h2>
-          <ul class="plain-list">
-            <li><strong id="protocol-label">Protocol:</strong> <span id="protocol-name"></span></li>
-            <li><strong id="protocol-version-label">Version:</strong> <span id="protocol-version"></span></li>
-            <li><strong id="storage-key-label">Storage key:</strong> <span id="storage-key"></span></li>
-          </ul>
-        </div>
-      </section>
+        </section>
+      </form>
     </main>
   </body>
 </html>

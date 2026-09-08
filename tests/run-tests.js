@@ -2,7 +2,7 @@
 const path = require("node:path");
 
 const repoRoot = path.join(__dirname, "..");
-const tests = ["bridge-core.test.js", "docs-app.test.js", "zip.test.js"];
+const tests = ["bridge-core.test.js", "bridge-client.test.js", "docs-app.test.js", "zip.test.js", "store-readiness.test.js"];
 
 for (const test of tests) {
   execFileSync(process.execPath, [path.join(__dirname, test)], {

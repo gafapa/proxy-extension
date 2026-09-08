@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proxy Extension Test Bench</title>
+    <meta
+      name="description"
+      content="Manual test bench for the Proxy Chrome extension bridge and in-page launcher."
+    />
+    <link rel="stylesheet" href="./extension-test.css" />
+    <script src="./bridge-client.example.js" defer></script>
+    <script src="./extension-test.js" defer></script>
+  </head>
+  <body>
+    <main class="bench-shell">
+      <header class="bench-header">
+        <div>
+          <p class="eyebrow">Proxy diagnostics</p>
+          <h1>Extension Test Bench</h1>
+        </div>
+        <div class="origin-strip" aria-label="Current page origin">
+          <span>Origin</span>
+          <strong id="origin-value">loading</strong>
+        </div>
+      </header>
+
+      <section class="status-grid" aria-label="Runtime status">
+        <article class="status-card" data-state="idle" id="bridge-card">
+          <span class="status-dot"></span>
+          <div>
+            <p>Bridge</p>
+            <strong id="bridge-status">Not checked</strong>
+          </div>
+        </article>
+        <article class="status-card" data-state="idle" id="launcher-card">
+          <span class="status-dot"></span>
+          <div>
+            <p>Launcher</p>
+            <strong id="launcher-status">Waiting for PX</strong>
+          </div>
+        </article>
+        <article class="status-card" data-state="idle" id="request-card">
+          <span class="status-dot"></span>
+          <div>
+            <p>Last request</p>
+            <strong id="request-status">No request yet</strong>
+          </div>
+        </article>
+      </section>
+
+      <section class="workbench">
+        <article class="panel controls-panel">
+          <div class="panel-head">
+            <p class="eyebrow">Bridge check</p>
+            <h2>Send a request through the extension</h2>
+          </div>
+
+          <div class="button-row">
+            <button class="primary-action" type="button" id="ping-button">Ping bridge</button>
+            <button type="button" id="sample-button">Load sample request</button>
+            <button type="button" id="clear-button">Clear log</button>
+          </div>
+
+          <form id="request-form" class="request-form">
+            <label>
+              <span>Target URL</span>
+              <input
+                id="target-url"
+                name="targetUrl"
+                type="url"
+                value="https://httpbin.org/anything?proxy=test"
+                required
+              />
+            </label>
+
+            <div class="field-grid">
+              <label>
+                <span>Method</span>
+                <select id="request-method" name="method">
+                  <option>GET</option>
+                  <option>POST</option>
+                  <option>PUT</option>
+                  <option>PATCH</option>
+                  <option>DELETE</option>
+                </select>
+              </label>
+              <label>
+                <span>Response</span>
+                <select id="response-type" name="responseType">
+                  <option value="text">Text</option>
+                  <option value="base64">Base64</option>
+                </select>
+              </label>
+            </div>
+
+            <label class="check-line">
+              <input id="private-network" name="privateNetwork" type="checkbox" />
+              <span>Allow private network target for this request</span>
+            </label>
+
+            <label>
+              <span>Headers JSON</span>
+              <textarea id="headers-json" name="headersJson" spellcheck="false">{
+  "Accept": "application/json"
+}</textarea>
+            </label>
+
+            <label>
+              <span>Body</span>
+              <textarea id="request-body" name="body" spellcheck="false"></textarea>
+            </label>
+
+            <button class="primary-action submit-action" type="submit">Run proxy request</button>
+          </form>
+        </article>
+
+        <article class="panel launcher-panel">
+          <div class="panel-head">
+            <p class="eyebrow">Launcher adhesion</p>
+            <h2>Check the PX module position</h2>
+          </div>
+          <p class="panel-copy">
+            The proxy content script should show a compact PX launcher. If the AI Runtime launcher exists, PX should sit directly beside it.
+          </p>
+          <div class="button-row">
+            <button type="button" id="activate-ai-button">Activate AI Runtime launcher</button>
+            <button type="button" id="fixture-button">Toggle AI launcher fixture</button>
+          </div>
+          <div class="fixture-preview" aria-hidden="true">
+            <span class="fixture-label">Expected bottom-left cluster</span>
+            <div class="fixture-line">
+              <span>AI</span>
+              <span>PX</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel log-panel">
+          <div class="panel-head">
+            <p class="eyebrow">Output</p>
+            <h2>Event log</h2>
+          </div>
+          <pre id="log-output" aria-live="polite"></pre>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
