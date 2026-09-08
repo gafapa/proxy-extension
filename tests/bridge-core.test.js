@@ -103,12 +103,22 @@ const pageBridge = require(path.join(__dirname, "..", "proxy", "shared", "page-b
   );
 
   assert.deepEqual(request.headers, { Authorization: "Bearer example", "If-Match": '"revision"' });
-  for (const method of ["PROPFIND", "MKCOL"]) {
-    assert.throws(
-      () => core.buildRequest({ url: "https://storage.example.com/folder", method }, settings, ["https://*/*"]),
-      (error) => error.code === "method_not_allowed",
-    );
-  }
+  const propfindRequest = core.buildRequest(
+    { url: "https://storage.example.com/folder", method: "PROPFIND", headers: { Depth: "1" } },
+    settings,
+    ["https://*/*"],
+    { allowPrivateNetwork: false },
+  );
+  const mkcolRequest = core.buildRequest(
+    { url: "https://storage.example.com/folder", method: "MKCOL" },
+    settings,
+    ["https://*/*"],
+    { allowPrivateNetwork: false },
+  );
+
+  assert.equal(propfindRequest.method, "PROPFIND");
+  assert.deepEqual(propfindRequest.headers, { Depth: "1" });
+  assert.equal(mkcolRequest.method, "MKCOL");
 })();
 
 (function testBuildRequestBlocksPrivateNetworkWithoutPolicy() {

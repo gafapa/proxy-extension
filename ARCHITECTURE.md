@@ -83,6 +83,8 @@ Static and dynamically registered content scripts load `bridge-config.js`, `page
 
 A `maxBodyBytes` value of `0` disables the extension-defined request-body limit. Positive values are bounded between 1 KiB and 10 MiB. The default remains 1 MiB.
 
+The default method policy includes the WebDAV `PROPFIND` and `MKCOL` methods. They pass through the same sender, target, header, body, private-network, redirect, timeout, and response-size validation as other requests.
+
 The service worker loads `bridge-config.js` and `bridge-core.js` when Chrome starts it for an extension event. The options page loads the same two files only when the user opens settings.
 
 Audit records are written outside the response-critical path, so storage persistence does not add to the time observed by the calling page.

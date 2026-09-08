@@ -1,5 +1,11 @@
 ﻿# Changelog
 
+## 0.2.6 - 2026-09-09
+
+- Enabled the WebDAV `PROPFIND` and `MKCOL` methods by default.
+- Added regression coverage for WebDAV collection discovery and creation requests.
+- Bumped the extension package version to `0.2.6`.
+
 ## 0.2.5 - 2026-09-09
 
 - Added the `edunoza-web` bridge application identifier.

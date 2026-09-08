@@ -9,7 +9,7 @@
     requestTimeoutMs: 15000,
     maxBodyBytes: 1024 * 1024,
     maxResponseBytes: 10 * 1024 * 1024,
-    allowedMethods: ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"],
+    allowedMethods: ["DELETE", "GET", "HEAD", "MKCOL", "OPTIONS", "PATCH", "POST", "PROPFIND", "PUT"],
     allowedPagePatterns: [],
     originPolicies: {
       "gallego.top": {
@@ -37,7 +37,7 @@
     EXTENSION_SOURCE: "proxy-extension",
     PROTOCOL_NAME: "proxy-extension-bridge",
     PROTOCOL_VERSION: 1,
-    VERSION: "0.2.5",
+    VERSION: "0.2.6",
     STORAGE_KEY: "bridgeSettings",
     AUDIT_STORAGE_KEY: "proxyAuditLog",
     DYNAMIC_CONTENT_SCRIPT_ID: "user_allowed_bridge_pages",

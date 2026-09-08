@@ -82,7 +82,7 @@ The extension can contact any `http` or `https` host. This keeps the bridge usab
 
 Edunoza can use the bridge with the protocol source identifier `edunoza-web`. It is intentionally not a built-in caller origin. Add `https://edunoza.com/*` under **Authorized sites** in the extension options and save the settings before using it.
 
-The default method set includes `GET` and `PUT`. Request headers may include `Authorization` and `If-Match`, allowing Edunoza to exchange a fixed-name encrypted file and use entity tags to detect concurrent updates. `PROPFIND` and `MKCOL` are not supported, so the remote folder must already exist.
+The default method set includes `GET`, `PUT`, `PROPFIND`, and `MKCOL`. Request headers may include `Authorization`, `If-Match`, and WebDAV headers such as `Depth`, allowing Edunoza to discover or create a remote collection, exchange an encrypted file, and use entity tags to detect concurrent updates.
 
 ## Development Commands
 

@@ -24,7 +24,7 @@ Key features:
 - Use localized extension settings in English, Spanish, French, German, Portuguese, Galician, Catalan, and Basque.
 - Open settings directly from the extension toolbar button.
 
-Edunoza integration uses the `edunoza-web` protocol identifier and requires the user to authorize `https://edunoza.com/*` explicitly. The default `GET` and `PUT` methods and allowed `Authorization` and `If-Match` headers support fixed-name encrypted-file synchronization with concurrent-update detection. WebDAV collection methods such as `PROPFIND` and `MKCOL` are not enabled.
+Edunoza integration uses the `edunoza-web` protocol identifier and requires the user to authorize `https://edunoza.com/*` explicitly. The default method set includes `GET`, `PUT`, `PROPFIND`, and `MKCOL`; headers such as `Authorization`, `If-Match`, and `Depth` support encrypted-file synchronization, concurrent-update detection, and WebDAV collection discovery and creation.
 
 Security notes:
 
