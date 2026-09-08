@@ -1,5 +1,12 @@
 ﻿# Changelog
 
+## 0.2.7 - 2026-09-09
+
+- Added `https://edunoza.com/*` as a built-in authorized caller pattern.
+- Added a one-time settings migration that enables `PROPFIND` and `MKCOL` in legacy saved method lists.
+- Preserved explicit method choices after settings are migrated to schema version 2.
+- Bumped the extension package version to `0.2.7`.
+
 ## 0.2.6 - 2026-09-09
 
 - Enabled the WebDAV `PROPFIND` and `MKCOL` methods by default.

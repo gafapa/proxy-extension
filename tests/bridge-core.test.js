@@ -17,11 +17,20 @@ const pageBridge = require(path.join(__dirname, "..", "proxy", "shared", "page-b
   assert.equal(settings.requestTimeoutMs, 120000);
   assert.equal(settings.maxBodyBytes, 1024);
   assert.equal(settings.maxResponseBytes, 50 * 1024 * 1024);
-  assert.deepEqual(settings.allowedMethods, ["GET", "POST"]);
+  assert.deepEqual(settings.allowedMethods, ["GET", "POST", "PROPFIND", "MKCOL"]);
   assert.deepEqual(settings.allowedPagePatterns, ["https://example.com/*", "http://localhost/*"]);
   assert.equal(settings.originPolicies["example.com"].enabled, true);
   assert.equal(settings.originPolicies.localhost.localNetworkAccess, true);
   assert.equal(settings.uiLanguage, "es");
+})();
+
+(function testStoredMethodMigrationRunsOnlyForLegacySettings() {
+  const migrated = core.normalizeSettings({ settingsVersion: 1, allowedMethods: ["GET", "PUT"] });
+  const current = core.normalizeSettings({ settingsVersion: 2, allowedMethods: ["GET", "PUT"] });
+
+  assert.deepEqual(migrated.allowedMethods, ["GET", "PUT", "PROPFIND", "MKCOL"]);
+  assert.equal(migrated.settingsVersion, 2);
+  assert.deepEqual(current.allowedMethods, ["GET", "PUT"]);
 })();
 
 (function testDynamicPagePatternsPreserveSchemeAndPath() {

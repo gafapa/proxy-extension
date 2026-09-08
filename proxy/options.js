@@ -521,6 +521,7 @@ async function saveSettings(settings) {
 function readFormSettings() {
   const allowedMethods = Array.from(document.querySelectorAll('input[name="allowedMethods"]:checked')).map((input) => input.value);
   return BridgeCore.normalizeSettings({
+    settingsVersion: activeSettings.settingsVersion,
     requestTimeoutMs: Number(timeoutInput.value),
     maxBodyBytes: Number(maxBodyInput.value),
     maxResponseBytes: Number(maxResponseInput.value),

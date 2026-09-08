@@ -45,6 +45,7 @@ The packaged content script is injected by default on these page origins:
 
 - `https://gallego.top/*`
 - `https://*.gallego.top/*`
+- `https://edunoza.com/*`
 - `http://127.0.0.1/*`
 - `https://127.0.0.1/*`
 - `http://localhost/*`
@@ -80,7 +81,9 @@ The extension can contact any `http` or `https` host. This keeps the bridge usab
 
 ## Edunoza
 
-Edunoza can use the bridge with the protocol source identifier `edunoza-web`. It is intentionally not a built-in caller origin. Add `https://edunoza.com/*` under **Authorized sites** in the extension options and save the settings before using it.
+Edunoza can use the bridge with the protocol source identifier `edunoza-web`. The caller pattern `https://edunoza.com/*` is authorized by default and appears among the built-in sites in the extension options.
+
+When upgrading from a version before `0.2.7`, stored method lists are migrated once to enable `PROPFIND` and `MKCOL`. Settings saved after the migration retain explicit user choices, including disabling either method.
 
 The default method set includes `GET`, `PUT`, `PROPFIND`, and `MKCOL`. Request headers may include `Authorization`, `If-Match`, and WebDAV headers such as `Depth`, allowing Edunoza to discover or create a remote collection, exchange an encrypted file, and use entity tags to detect concurrent updates.
 

@@ -2,7 +2,7 @@
 
 const BridgeConfig = globalThis.ProxyExtensionBridgeConfig;
 const BridgeCore = globalThis.ProxyExtensionBridgeCore;
-const { AUDIT_STORAGE_KEY, DYNAMIC_CONTENT_SCRIPT_ID, EXTENSION_SOURCE, MESSAGE_TYPES, PROTOCOL_NAME, PROTOCOL_VERSION, STORAGE_KEY } = BridgeConfig;
+const { AUDIT_STORAGE_KEY, DYNAMIC_CONTENT_SCRIPT_ID, EXTENSION_SOURCE, MESSAGE_TYPES, PROTOCOL_NAME, PROTOCOL_VERSION, SETTINGS_VERSION, STORAGE_KEY } = BridgeConfig;
 const AUDIT_LOG_LIMIT = 20;
 
 function getAllowedPagePatterns() {
@@ -25,7 +25,12 @@ function getRuntimeAllowedPagePatterns(settings) {
 
 async function loadSettings() {
   const result = await chrome.storage.sync.get(STORAGE_KEY);
-  return BridgeCore.normalizeSettings(result[STORAGE_KEY]);
+  const storedSettings = result[STORAGE_KEY];
+  const settings = BridgeCore.normalizeSettings(storedSettings);
+  if (!storedSettings || storedSettings.settingsVersion !== SETTINGS_VERSION) {
+    await chrome.storage.sync.set({ [STORAGE_KEY]: settings });
+  }
+  return settings;
 }
 
 function getBridgeContentScriptFiles() {

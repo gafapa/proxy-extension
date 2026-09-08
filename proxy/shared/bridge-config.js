@@ -6,6 +6,7 @@
   root.ProxyExtensionBridgeConfig = exported;
 })(typeof globalThis !== "undefined" ? globalThis : this, function () {
   const DEFAULT_SETTINGS = {
+    settingsVersion: 2,
     requestTimeoutMs: 15000,
     maxBodyBytes: 1024 * 1024,
     maxResponseBytes: 10 * 1024 * 1024,
@@ -14,6 +15,11 @@
     originPolicies: {
       "gallego.top": {
         origin: "gallego.top",
+        enabled: true,
+        localNetworkAccess: false,
+      },
+      "edunoza.com": {
+        origin: "edunoza.com",
         enabled: true,
         localNetworkAccess: false,
       },
@@ -37,7 +43,8 @@
     EXTENSION_SOURCE: "proxy-extension",
     PROTOCOL_NAME: "proxy-extension-bridge",
     PROTOCOL_VERSION: 1,
-    VERSION: "0.2.6",
+    VERSION: "0.2.7",
+    SETTINGS_VERSION: 2,
     STORAGE_KEY: "bridgeSettings",
     AUDIT_STORAGE_KEY: "proxyAuditLog",
     DYNAMIC_CONTENT_SCRIPT_ID: "user_allowed_bridge_pages",

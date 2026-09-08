@@ -42,6 +42,7 @@ assert.ok(manifest.permissions.includes("scripting"));
 assert.ok(!manifest.permissions.includes("declarativeNetRequest"), "DNR must not globally rewrite target CORS headers.");
 assert.equal(manifest.declarative_net_request, undefined);
 assert.deepEqual(manifest.host_permissions, ["http://*/*", "https://*/*"]);
+assert.ok(manifest.content_scripts[0].matches.includes("https://edunoza.com/*"));
 assert.deepEqual(
   manifest.content_scripts[0].js,
   ["shared/bridge-config.js", "shared/page-bridge.js", "content-script.js"],
@@ -80,6 +81,10 @@ const serviceWorkerSource = readText(path.join(proxyRoot, "service-worker.js"));
 assert.ok(
   serviceWorkerSource.includes("createAllowedPagePatterns(settings.originPolicies, settings.allowedPagePatterns)"),
   "Dynamic content-script registration must use only the stored custom page patterns.",
+);
+assert.ok(
+  serviceWorkerSource.includes("storedSettings.settingsVersion !== SETTINGS_VERSION"),
+  "The service worker must persist legacy settings migrations automatically.",
 );
 
 const docsIndexSource = readText(path.join(repoRoot, "docs", "index.html"));

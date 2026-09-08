@@ -26,7 +26,7 @@ assert.ok(!fs.existsSync(path.join(tempDir, "rules", "ollama-cors.json")), "Expe
 const packagedConfig = require(path.join(tempDir, "shared", "bridge-config.js"));
 const packagedCore = require(path.join(tempDir, "shared", "bridge-core.js"));
 const packagedPageBridge = require(path.join(tempDir, "shared", "page-bridge.js"));
-assert.equal(packagedConfig.VERSION, "0.2.6");
+assert.equal(packagedConfig.VERSION, "0.2.7");
 assert.equal(typeof packagedCore.executeRequest, "function");
 assert.equal(typeof packagedPageBridge.validatePageEnvelope, "function");
 

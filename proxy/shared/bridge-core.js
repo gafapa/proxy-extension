@@ -5,7 +5,7 @@
   }
   root.ProxyExtensionBridgeCore = exported;
 })(typeof globalThis !== "undefined" ? globalThis : this, function (config) {
-  const { DEFAULT_SETTINGS, FORBIDDEN_HEADERS, MESSAGE_TYPES, PROTOCOL_NAME, PROTOCOL_VERSION } = config;
+  const { DEFAULT_SETTINGS, FORBIDDEN_HEADERS, MESSAGE_TYPES, PROTOCOL_NAME, PROTOCOL_VERSION, SETTINGS_VERSION } = config;
   const textEncoder = typeof TextEncoder !== "undefined" ? new TextEncoder() : null;
 
   function createBridgeError(code, message, details, status) {
@@ -276,14 +276,19 @@
     const maxResponseBytes = Number.isFinite(raw.maxResponseBytes)
       ? Math.max(1024, Math.min(50 * 1024 * 1024, Math.trunc(raw.maxResponseBytes)))
       : DEFAULT_SETTINGS.maxResponseBytes;
-    const allowedMethods = Array.isArray(raw.allowedMethods)
+    let allowedMethods = Array.isArray(raw.allowedMethods)
       ? raw.allowedMethods.filter((method) => DEFAULT_SETTINGS.allowedMethods.includes(String(method).toUpperCase())).map((method) => String(method).toUpperCase())
       : DEFAULT_SETTINGS.allowedMethods.slice();
+    const storedSettingsVersion = Number.isInteger(raw.settingsVersion) ? raw.settingsVersion : 1;
+    if (Array.isArray(raw.allowedMethods) && storedSettingsVersion < SETTINGS_VERSION) {
+      allowedMethods = allowedMethods.concat(["PROPFIND", "MKCOL"]);
+    }
     const allowedPagePatterns = normalizeAllowedPagePatterns(raw.allowedPagePatterns);
     const originPolicies = normalizeOriginPolicies(raw.originPolicies, allowedPagePatterns);
     const uiLanguage = normalizeUiLanguage(raw.uiLanguage);
 
     return {
+      settingsVersion: SETTINGS_VERSION,
       requestTimeoutMs,
       maxBodyBytes,
       maxResponseBytes,

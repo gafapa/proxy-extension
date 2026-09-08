@@ -85,6 +85,8 @@ A `maxBodyBytes` value of `0` disables the extension-defined request-body limit.
 
 The default method policy includes the WebDAV `PROPFIND` and `MKCOL` methods. They pass through the same sender, target, header, body, private-network, redirect, timeout, and response-size validation as other requests.
 
+Settings schema version 2 migrates legacy stored method lists by adding `PROPFIND` and `MKCOL`. Normalized settings are marked with the current schema version, so later user changes to the method list are preserved. `https://edunoza.com/*` is a static built-in caller pattern and is not duplicated by dynamic registration.
+
 The service worker loads `bridge-config.js` and `bridge-core.js` when Chrome starts it for an extension event. The options page loads the same two files only when the user opens settings.
 
 Audit records are written outside the response-critical path, so storage persistence does not add to the time observed by the calling page.
