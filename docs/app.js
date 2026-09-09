@@ -17,7 +17,7 @@ const translations = {
     metaFlowLabel: "Flow",
     metaFlowValue: "page -> content script -> service worker -> target",
     metaCallersLabel: "Caller pages",
-    metaCallersValue: "gallego.top, localhost, 127.0.0.1",
+    metaCallersValue: "gallego.top, edunoza.com, localhost, 127.0.0.1",
     metaTargetsLabel: "Target hosts",
     metaTargetsValue: "HTTP/HTTPS endpoints; private network requires permission",
     downloadKicker: "Download",
@@ -34,7 +34,7 @@ const translations = {
     step3Title: "Load unpacked",
     step3Body: "Select the extracted folder that contains manifest.json at its root.",
     step4Title: "Use it from allowed pages",
-    step4Body: "Run the bridge from gallego.top, localhost, or 127.0.0.1.",
+    step4Body: "Run the bridge from gallego.top, edunoza.com, localhost, or 127.0.0.1.",
     scopeKicker: "Scope",
     scopeTitle: "Open target access, restricted caller access.",
     scopeParagraph1: "The extension can call HTTP or HTTPS endpoints covered by its host permissions. Private-network targets require both an enabled origin policy and an explicit request flag.",
@@ -45,6 +45,9 @@ const translations = {
     scopeList4: "Validates the sender against the manifest allowlist.",
     finalKicker: "Ready",
     finalTitle: "Download the package and load it directly into Chrome.",
+    finalTestBench: "Extension test bench",
+    finalClientExample: "Bridge client example",
+    finalChangelog: "Changelog",
     finalCta: "Get Proxy"
   },
   es: {
@@ -65,9 +68,9 @@ const translations = {
     metaFlowLabel: "Flujo",
     metaFlowValue: "página -> content script -> service worker -> destino",
     metaCallersLabel: "Páginas autorizadas",
-    metaCallersValue: "gallego.top, localhost, 127.0.0.1",
+    metaCallersValue: "gallego.top, edunoza.com, localhost, 127.0.0.1",
     metaTargetsLabel: "Hosts de destino",
-    metaTargetsValue: "HTTP/HTTPS endpoints; private network requires permission",
+    metaTargetsValue: "Endpoints HTTP/HTTPS; la red privada requiere permiso",
     downloadKicker: "Descarga",
     downloadTitle: "Un paquete, listo para extraer.",
     archiveLabel: "Archivo",
@@ -82,17 +85,20 @@ const translations = {
     step3Title: "Carga descomprimida",
     step3Body: "Selecciona la carpeta extraída que contiene manifest.json en su raíz.",
     step4Title: "Úsala desde páginas permitidas",
-    step4Body: "Ejecuta el puente desde gallego.top, localhost o 127.0.0.1.",
+    step4Body: "Ejecuta el puente desde gallego.top, edunoza.com, localhost o 127.0.0.1.",
     scopeKicker: "Alcance",
     scopeTitle: "Acceso abierto al destino, acceso restringido al origen.",
-    scopeParagraph1: "The extension can call HTTP or HTTPS endpoints covered by its host permissions. Private-network targets require both an enabled origin policy and an explicit request flag.",
-    scopeParagraph2: "The restriction is on who can use it. The bridge only accepts enabled callers from configured origin policies and the built-in trusted page matches.",
+    scopeParagraph1: "La extensión puede llamar a endpoints HTTP o HTTPS cubiertos por sus permisos de host. Los destinos de red privada requieren una política de origen activa y una opción explícita en la solicitud.",
+    scopeParagraph2: "La restricción determina quién puede usarla. El puente solo acepta llamadas desde orígenes activos en la configuración y desde las páginas de confianza incluidas.",
     scopeList1: "Usa autenticación por token sin cookies del navegador.",
     scopeList2: "Rechaza protocolos no soportados.",
     scopeList3: "Filtra cabeceras de transporte no seguras.",
     scopeList4: "Valida el remitente frente a la allowlist del manifiesto.",
     finalKicker: "Listo",
     finalTitle: "Descarga el paquete y cárgalo directamente en Chrome.",
+    finalTestBench: "Banco de pruebas de la extensión",
+    finalClientExample: "Ejemplo de cliente del puente",
+    finalChangelog: "Historial de cambios",
     finalCta: "Obtener Proxy"
   },
   gl: {
@@ -113,9 +119,9 @@ const translations = {
     metaFlowLabel: "Fluxo",
     metaFlowValue: "páxina -> content script -> service worker -> destino",
     metaCallersLabel: "Páxinas autorizadas",
-    metaCallersValue: "gallego.top, localhost, 127.0.0.1",
+    metaCallersValue: "gallego.top, edunoza.com, localhost, 127.0.0.1",
     metaTargetsLabel: "Hosts de destino",
-    metaTargetsValue: "HTTP/HTTPS endpoints; private network requires permission",
+    metaTargetsValue: "Endpoints HTTP/HTTPS; a rede privada require permiso",
     downloadKicker: "Descarga",
     downloadTitle: "Un paquete, listo para extraer.",
     archiveLabel: "Arquivo",
@@ -130,17 +136,20 @@ const translations = {
     step3Title: "Carga descomprimida",
     step3Body: "Selecciona o cartafol extraído que contén manifest.json na raíz.",
     step4Title: "Úsaa desde páxinas permitidas",
-    step4Body: "Executa a ponte desde gallego.top, localhost ou 127.0.0.1.",
+    step4Body: "Executa a ponte desde gallego.top, edunoza.com, localhost ou 127.0.0.1.",
     scopeKicker: "Alcance",
     scopeTitle: "Acceso aberto ao destino, acceso restrinxido á orixe.",
-    scopeParagraph1: "The extension can call HTTP or HTTPS endpoints covered by its host permissions. Private-network targets require both an enabled origin policy and an explicit request flag.",
-    scopeParagraph2: "The restriction is on who can use it. The bridge only accepts enabled callers from configured origin policies and the built-in trusted page matches.",
+    scopeParagraph1: "A extensión pode chamar a endpoints HTTP ou HTTPS cubertos polos seus permisos de host. Os destinos da rede privada requiren unha política de orixe activa e unha opción explícita na solicitude.",
+    scopeParagraph2: "A restrición determina quen pode usala. A ponte só acepta chamadas desde orixes activas na configuración e desde as páxinas de confianza incluídas.",
     scopeList1: "Usa autenticación con token sen cookies do navegador.",
     scopeList2: "Rexecta protocolos non compatibles.",
     scopeList3: "Filtra cabeceiras de transporte non seguras.",
     scopeList4: "Valida o remitente fronte á allowlist do manifesto.",
     finalKicker: "Listo",
     finalTitle: "Descarga o paquete e cárgao directamente en Chrome.",
+    finalTestBench: "Banco de probas da extensión",
+    finalClientExample: "Exemplo de cliente da ponte",
+    finalChangelog: "Historial de cambios",
     finalCta: "Obter Proxy"
   },
   fr: {
@@ -161,9 +170,9 @@ const translations = {
     metaFlowLabel: "Flux",
     metaFlowValue: "page -> content script -> service worker -> cible",
     metaCallersLabel: "Pages autorisées",
-    metaCallersValue: "gallego.top, localhost, 127.0.0.1",
+    metaCallersValue: "gallego.top, edunoza.com, localhost, 127.0.0.1",
     metaTargetsLabel: "Hôtes cibles",
-    metaTargetsValue: "HTTP/HTTPS endpoints; private network requires permission",
+    metaTargetsValue: "Points de terminaison HTTP/HTTPS ; le réseau privé requiert une autorisation",
     downloadKicker: "Téléchargement",
     downloadTitle: "Un paquet, prêt à extraire.",
     archiveLabel: "Archive",
@@ -178,17 +187,20 @@ const translations = {
     step3Title: "Charger l'extension non empaquetée",
     step3Body: "Sélectionnez le dossier extrait qui contient manifest.json à sa racine.",
     step4Title: "Utiliser depuis les pages autorisées",
-    step4Body: "Utilisez le pont depuis gallego.top, localhost ou 127.0.0.1.",
+    step4Body: "Utilisez le pont depuis gallego.top, edunoza.com, localhost ou 127.0.0.1.",
     scopeKicker: "Portée",
     scopeTitle: "Accès cible ouvert, accès appelant restreint.",
-    scopeParagraph1: "The extension can call HTTP or HTTPS endpoints covered by its host permissions. Private-network targets require both an enabled origin policy and an explicit request flag.",
-    scopeParagraph2: "The restriction is on who can use it. The bridge only accepts enabled callers from configured origin policies and the built-in trusted page matches.",
+    scopeParagraph1: "L’extension peut appeler les points de terminaison HTTP ou HTTPS couverts par ses autorisations d’hôte. Les destinations du réseau privé nécessitent une politique d’origine active et une option explicite dans la requête.",
+    scopeParagraph2: "La restriction détermine qui peut l’utiliser. Le pont accepte uniquement les appels provenant d’origines actives dans la configuration et des pages de confiance incluses.",
     scopeList1: "Utilise l'authentification par jeton sans cookies du navigateur.",
     scopeList2: "Rejette les protocoles non pris en charge.",
     scopeList3: "Filtre les en-têtes de transport non sûrs.",
     scopeList4: "Valide l'expéditeur par rapport à la liste autorisée du manifeste.",
     finalKicker: "Prêt",
     finalTitle: "Téléchargez le paquet et chargez-le directement dans Chrome.",
+    finalTestBench: "Banc de test de l’extension",
+    finalClientExample: "Exemple de client du pont",
+    finalChangelog: "Historique des modifications",
     finalCta: "Obtenir Proxy"
   },
   de: {
@@ -209,9 +221,9 @@ const translations = {
     metaFlowLabel: "Ablauf",
     metaFlowValue: "Seite -> Content Script -> Service Worker -> Ziel",
     metaCallersLabel: "Erlaubte Seiten",
-    metaCallersValue: "gallego.top, localhost, 127.0.0.1",
+    metaCallersValue: "gallego.top, edunoza.com, localhost, 127.0.0.1",
     metaTargetsLabel: "Ziel-Hosts",
-    metaTargetsValue: "HTTP/HTTPS endpoints; private network requires permission",
+    metaTargetsValue: "HTTP/HTTPS-Endpunkte; private Netzwerke erfordern eine Berechtigung",
     downloadKicker: "Download",
     downloadTitle: "Ein Paket, direkt zum Entpacken bereit.",
     archiveLabel: "Archiv",
@@ -226,17 +238,20 @@ const translations = {
     step3Title: "Entpackte Erweiterung laden",
     step3Body: "Wähle den entpackten Ordner aus, der manifest.json im Stammverzeichnis enthält.",
     step4Title: "Von erlaubten Seiten nutzen",
-    step4Body: "Nutze die Brücke von gallego.top, localhost oder 127.0.0.1 aus.",
+    step4Body: "Nutze die Brücke von gallego.top, edunoza.com, localhost oder 127.0.0.1 aus.",
     scopeKicker: "Umfang",
     scopeTitle: "Offener Zielzugriff, eingeschränkter Aufruferzugriff.",
-    scopeParagraph1: "The extension can call HTTP or HTTPS endpoints covered by its host permissions. Private-network targets require both an enabled origin policy and an explicit request flag.",
-    scopeParagraph2: "The restriction is on who can use it. The bridge only accepts enabled callers from configured origin policies and the built-in trusted page matches.",
+    scopeParagraph1: "Die Erweiterung kann HTTP- oder HTTPS-Endpunkte aufrufen, die durch ihre Hostberechtigungen abgedeckt sind. Ziele in privaten Netzwerken erfordern eine aktive Ursprungsrichtlinie und eine ausdrückliche Option in der Anfrage.",
+    scopeParagraph2: "Die Einschränkung legt fest, wer sie verwenden darf. Die Brücke akzeptiert nur Aufrufe von in der Konfiguration aktivierten Ursprüngen und den integrierten vertrauenswürdigen Seiten.",
     scopeList1: "Verwendet tokenbasierte Authentifizierung ohne Browser-Cookies.",
     scopeList2: "Lehnt nicht unterstützte Protokolle ab.",
     scopeList3: "Filtert unsichere Transport-Header.",
     scopeList4: "Prüft den Absender gegen die Allowlist im Manifest.",
     finalKicker: "Bereit",
     finalTitle: "Lade das Paket herunter und lade es direkt in Chrome.",
+    finalTestBench: "Testumgebung der Erweiterung",
+    finalClientExample: "Beispiel für einen Brückenclient",
+    finalChangelog: "Änderungsprotokoll",
     finalCta: "Proxy holen"
   },
   pt: {
@@ -257,9 +272,9 @@ const translations = {
     metaFlowLabel: "Fluxo",
     metaFlowValue: "página -> content script -> service worker -> destino",
     metaCallersLabel: "Páginas autorizadas",
-    metaCallersValue: "gallego.top, localhost, 127.0.0.1",
+    metaCallersValue: "gallego.top, edunoza.com, localhost, 127.0.0.1",
     metaTargetsLabel: "Hosts de destino",
-    metaTargetsValue: "HTTP/HTTPS endpoints; private network requires permission",
+    metaTargetsValue: "Endpoints HTTP/HTTPS; a rede privada requer permissão",
     downloadKicker: "Download",
     downloadTitle: "Um pacote, pronto a extrair.",
     archiveLabel: "Arquivo",
@@ -274,17 +289,20 @@ const translations = {
     step3Title: "Carregar sem compactação",
     step3Body: "Seleciona a pasta extraída que contém manifest.json na raiz.",
     step4Title: "Usar a partir de páginas permitidas",
-    step4Body: "Executa a ponte a partir de gallego.top, localhost ou 127.0.0.1.",
+    step4Body: "Executa a ponte a partir de gallego.top, edunoza.com, localhost ou 127.0.0.1.",
     scopeKicker: "Âmbito",
     scopeTitle: "Acesso aberto ao destino, acesso restrito ao chamador.",
-    scopeParagraph1: "The extension can call HTTP or HTTPS endpoints covered by its host permissions. Private-network targets require both an enabled origin policy and an explicit request flag.",
-    scopeParagraph2: "The restriction is on who can use it. The bridge only accepts enabled callers from configured origin policies and the built-in trusted page matches.",
+    scopeParagraph1: "A extensão pode chamar endpoints HTTP ou HTTPS abrangidos pelas suas permissões de host. Os destinos de rede privada requerem uma política de origem ativa e uma opção explícita no pedido.",
+    scopeParagraph2: "A restrição determina quem pode utilizá-la. A ponte só aceita chamadas de origens ativas na configuração e das páginas de confiança incluídas.",
     scopeList1: "Usa autenticação por token sem cookies do navegador.",
     scopeList2: "Rejeita protocolos não suportados.",
     scopeList3: "Filtra cabeçalhos de transporte inseguros.",
     scopeList4: "Valida o remetente face à allowlist do manifesto.",
     finalKicker: "Pronto",
     finalTitle: "Descarrega o pacote e carrega-o diretamente no Chrome.",
+    finalTestBench: "Banco de testes da extensão",
+    finalClientExample: "Exemplo de cliente da ponte",
+    finalChangelog: "Registo de alterações",
     finalCta: "Obter Proxy"
   },
   ca: {
@@ -305,9 +323,9 @@ const translations = {
     metaFlowLabel: "Flux",
     metaFlowValue: "pàgina -> content script -> service worker -> destí",
     metaCallersLabel: "Pàgines autoritzades",
-    metaCallersValue: "gallego.top, localhost, 127.0.0.1",
+    metaCallersValue: "gallego.top, edunoza.com, localhost, 127.0.0.1",
     metaTargetsLabel: "Hosts de destí",
-    metaTargetsValue: "HTTP/HTTPS endpoints; private network requires permission",
+    metaTargetsValue: "Endpoints HTTP/HTTPS; la xarxa privada requereix permís",
     downloadKicker: "Descàrrega",
     downloadTitle: "Un paquet, llest per extreure.",
     archiveLabel: "Arxiu",
@@ -322,17 +340,20 @@ const translations = {
     step3Title: "Carrega descomprimida",
     step3Body: "Selecciona la carpeta extreta que conté manifest.json a l'arrel.",
     step4Title: "Fes-la servir des de pàgines permeses",
-    step4Body: "Executa el pont des de gallego.top, localhost o 127.0.0.1.",
+    step4Body: "Executa el pont des de gallego.top, edunoza.com, localhost o 127.0.0.1.",
     scopeKicker: "Abast",
     scopeTitle: "Accés obert al destí, accés restringit a l'origen.",
-    scopeParagraph1: "The extension can call HTTP or HTTPS endpoints covered by its host permissions. Private-network targets require both an enabled origin policy and an explicit request flag.",
-    scopeParagraph2: "The restriction is on who can use it. The bridge only accepts enabled callers from configured origin policies and the built-in trusted page matches.",
+    scopeParagraph1: "L’extensió pot cridar endpoints HTTP o HTTPS coberts pels seus permisos d’amfitrió. Les destinacions de xarxa privada requereixen una política d’origen activa i una opció explícita a la sol·licitud.",
+    scopeParagraph2: "La restricció determina qui la pot utilitzar. El pont només accepta crides d’orígens actius a la configuració i de les pàgines de confiança incloses.",
     scopeList1: "Fa servir autenticació per token sense cookies del navegador.",
     scopeList2: "Rebutja protocols no compatibles.",
     scopeList3: "Filtra capçaleres de transport no segures.",
     scopeList4: "Valida el remitent contra l'allowlist del manifest.",
     finalKicker: "A punt",
     finalTitle: "Descarrega el paquet i carrega'l directament a Chrome.",
+    finalTestBench: "Banc de proves de l’extensió",
+    finalClientExample: "Exemple de client del pont",
+    finalChangelog: "Registre de canvis",
     finalCta: "Obtén Proxy"
   },
   eu: {
@@ -353,9 +374,9 @@ const translations = {
     metaFlowLabel: "Fluxua",
     metaFlowValue: "orria -> content script -> service worker -> helmuga",
     metaCallersLabel: "Baimendutako orriak",
-    metaCallersValue: "gallego.top, localhost, 127.0.0.1",
+    metaCallersValue: "gallego.top, edunoza.com, localhost, 127.0.0.1",
     metaTargetsLabel: "Helmugako hostak",
-    metaTargetsValue: "HTTP/HTTPS endpoints; private network requires permission",
+    metaTargetsValue: "HTTP/HTTPS endpointak; sare pribatuak baimena behar du",
     downloadKicker: "Deskarga",
     downloadTitle: "Pakete bakarra, erauzteko prest.",
     archiveLabel: "Artxiboa",
@@ -370,27 +391,30 @@ const translations = {
     step3Title: "Kargatu deskonprimituta",
     step3Body: "Hautatu erroan manifest.json duen erauzitako karpeta.",
     step4Title: "Erabili baimendutako orrietatik",
-    step4Body: "Exekutatu zubia gallego.top, localhost edo 127.0.0.1-etik.",
+    step4Body: "Exekutatu zubia gallego.top, edunoza.com, localhost edo 127.0.0.1-etik.",
     scopeKicker: "Esparrua",
     scopeTitle: "Helmugarako sarbide irekia, deitzailearentzako sarbide mugatua.",
-    scopeParagraph1: "The extension can call HTTP or HTTPS endpoints covered by its host permissions. Private-network targets require both an enabled origin policy and an explicit request flag.",
-    scopeParagraph2: "The restriction is on who can use it. The bridge only accepts enabled callers from configured origin policies and the built-in trusted page matches.",
+    scopeParagraph1: "Luzapenak bere host-baimenek estaltzen dituzten HTTP edo HTTPS endpointak dei ditzake. Sare pribatuko helmugek jatorri-politika aktiboa eta eskaeran aukera esplizitua behar dituzte.",
+    scopeParagraph2: "Murrizketak nork erabil dezakeen zehazten du. Zubiak konfigurazioan aktibatutako jatorrietatik eta barneko konfiantzazko orrietatik datozen deiak bakarrik onartzen ditu.",
     scopeList1: "Token bidezko autentifikazioa erabiltzen du nabigatzaileko cookierik gabe.",
     scopeList2: "Onartzen ez diren protokoloak baztertzen ditu.",
     scopeList3: "Garraioko goiburu ez-seguruak iragazten ditu.",
     scopeList4: "Igorlea manifestuko allowlist-aren aurka balioztatzen du.",
     finalKicker: "Prest",
     finalTitle: "Deskargatu paketea eta kargatu zuzenean Chrome-n.",
+    finalTestBench: "Luzapenaren proba-bankua",
+    finalClientExample: "Zubi-bezeroaren adibidea",
+    finalChangelog: "Aldaketen erregistroa",
     finalCta: "Lortu Proxy"
   }
 };
 
 const supportedLocales = Object.keys(translations);
 
-function normalizeLocale(input) {
+function matchLocale(input) {
   const value = String(input || "").trim().toLowerCase();
   if (!value) {
-    return "en";
+    return null;
   }
 
   if (supportedLocales.includes(value)) {
@@ -398,7 +422,11 @@ function normalizeLocale(input) {
   }
 
   const languagePart = value.split("-")[0];
-  return supportedLocales.includes(languagePart) ? languagePart : "en";
+  return supportedLocales.includes(languagePart) ? languagePart : null;
+}
+
+function normalizeLocale(input) {
+  return matchLocale(input) || "en";
 }
 
 function applyTranslation(locale) {
@@ -433,13 +461,20 @@ function applyTranslation(locale) {
 
 globalThis.ProxyExtensionDocsApp = {
   translations,
+  matchLocale,
   normalizeLocale,
   applyTranslation,
 };
 
 const languageSelect = document.getElementById("language-select");
 const savedLocale = window.localStorage.getItem("proxy-extension-locale");
-const activeLocale = savedLocale ? normalizeLocale(savedLocale) : normalizeLocale(navigator.language);
+const browserLocales = Array.isArray(navigator.languages) && navigator.languages.length
+  ? navigator.languages
+  : [navigator.language];
+const detectedLocale = browserLocales
+  .map((locale) => matchLocale(locale))
+  .find(Boolean) || "en";
+const activeLocale = savedLocale ? normalizeLocale(savedLocale) : detectedLocale;
 languageSelect.value = activeLocale;
 applyTranslation(activeLocale);
 
