@@ -93,6 +93,11 @@ assert.ok(!docsIndexSource.includes("Includes credentials for cookie-backed sess
 
 const docsAppSource = readText(path.join(repoRoot, "docs", "app.js"));
 const optionsSource = readText(path.join(proxyRoot, "options.js"));
+const optionsHtmlSource = readText(path.join(proxyRoot, "options.html"));
+assert.ok(optionsHtmlSource.includes('<select id="max-body-bytes"'));
+assert.ok(optionsHtmlSource.includes('<select id="max-response-bytes"'));
+assert.ok(optionsHtmlSource.includes('<option value="104857600">100 MB</option>'));
+assert.ok(optionsHtmlSource.includes('<option id="unlimited-body-option" value="0">Unlimited</option>'));
 for (const locale of expectedLocaleDirectories) {
   assert.ok(new RegExp(`\\b${locale}:\\s*\\{`).test(docsAppSource), `Website translations must include ${locale}.`);
   assert.ok(new RegExp(`\\b${locale}:\\s*\\{`).test(optionsSource), `Options translations must include ${locale}.`);

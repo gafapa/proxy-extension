@@ -7,6 +7,7 @@
 })(typeof globalThis !== "undefined" ? globalThis : this, function (config) {
   const { DEFAULT_SETTINGS, FORBIDDEN_HEADERS, MESSAGE_TYPES, PROTOCOL_NAME, PROTOCOL_VERSION, SETTINGS_VERSION } = config;
   const textEncoder = typeof TextEncoder !== "undefined" ? new TextEncoder() : null;
+  const SIZE_OPTIONS = [1, 5, 10, 25, 50, 100].map((megabytes) => megabytes * 1024 * 1024);
 
   function createBridgeError(code, message, details, status) {
     const error = new Error(message);
@@ -271,10 +272,10 @@
     const maxBodyBytes = raw.maxBodyBytes === 0
       ? 0
       : Number.isFinite(raw.maxBodyBytes)
-        ? Math.max(1024, Math.min(10 * 1024 * 1024, Math.trunc(raw.maxBodyBytes)))
-      : DEFAULT_SETTINGS.maxBodyBytes;
+        ? SIZE_OPTIONS.find((size) => size >= raw.maxBodyBytes) || SIZE_OPTIONS[SIZE_OPTIONS.length - 1]
+        : DEFAULT_SETTINGS.maxBodyBytes;
     const maxResponseBytes = Number.isFinite(raw.maxResponseBytes)
-      ? Math.max(1024, Math.min(50 * 1024 * 1024, Math.trunc(raw.maxResponseBytes)))
+      ? SIZE_OPTIONS.find((size) => size >= raw.maxResponseBytes) || SIZE_OPTIONS[SIZE_OPTIONS.length - 1]
       : DEFAULT_SETTINGS.maxResponseBytes;
     let allowedMethods = Array.isArray(raw.allowedMethods)
       ? raw.allowedMethods.filter((method) => DEFAULT_SETTINGS.allowedMethods.includes(String(method).toUpperCase())).map((method) => String(method).toUpperCase())

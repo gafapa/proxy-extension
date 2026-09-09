@@ -1,5 +1,12 @@
 ﻿# Changelog
 
+## 0.2.8 - 2026-09-09
+
+- Replaced numeric request and response size fields with selectors ranging from 1 MB to 100 MB.
+- Retained an unlimited option for request bodies.
+- Normalized legacy custom sizes to the next available selector value.
+- Bumped the extension package version to `0.2.8`.
+
 ## 0.2.7 - 2026-09-09
 
 - Added `https://edunoza.com/*` as a built-in authorized caller pattern.

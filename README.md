@@ -77,7 +77,7 @@ The extension can contact any `http` or `https` host. This keeps the bridge usab
 
 - Click the extension toolbar icon or open `Extension options` from `chrome://extensions`.
 - The options page controls authorized caller pages, interface language, request timeout, maximum request body size, maximum response body size, and allowed HTTP methods.
-- The request body limit defaults to 1 MiB. Set it to `0` to remove the extension-defined limit; Chrome messaging, memory, and target-server limits still apply.
+- Request and response limits use selectors with 1, 5, 10, 25, 50, and 100 MB options. The request selector also provides `Unlimited`; Chrome messaging, memory, and target-server limits still apply.
 
 ## Edunoza
 

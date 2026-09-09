@@ -18,7 +18,7 @@ Key features:
 
 - Authorize caller pages from the extension options page.
 - Configure request timeout, maximum request body size, maximum response body size, and allowed HTTP methods.
-- Keep the 1 MiB default upload limit, choose a finite limit up to 10 MiB, or set `0` for no extension-defined body limit.
+- Choose request and response limits from 1, 5, 10, 25, 50, or 100 MB. Requests also support an unlimited option, while the defaults remain 1 MB for requests and 10 MB for responses.
 - Run with a self-contained Manifest V3 codebase.
 - Keep page startup lightweight by loading network request code only in the extension service worker.
 - Use localized extension settings in English, Spanish, French, German, Portuguese, Galician, Catalan, and Basque.

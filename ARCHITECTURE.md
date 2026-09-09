@@ -81,7 +81,7 @@ Provide a standalone Chrome MV3 extension that proxies Moodle HTTP requests for 
 
 Static and dynamically registered content scripts load `bridge-config.js`, `page-bridge.js`, and `content-script.js`. They do not load `bridge-core.js`. This reduces the page-injected JavaScript source from 33,906 bytes to 12,926 bytes in version `0.2.5`.
 
-A `maxBodyBytes` value of `0` disables the extension-defined request-body limit. Positive values are bounded between 1 KiB and 10 MiB. The default remains 1 MiB.
+A `maxBodyBytes` value of `0` disables the extension-defined request-body limit. Request and response limits otherwise normalize to the next available selector value: 1, 5, 10, 25, 50, or 100 MB. Defaults remain 1 MB for requests and 10 MB for responses.
 
 The default method policy includes the WebDAV `PROPFIND` and `MKCOL` methods. They pass through the same sender, target, header, body, private-network, redirect, timeout, and response-size validation as other requests.
 

@@ -43,7 +43,7 @@
     EXTENSION_SOURCE: "proxy-extension",
     PROTOCOL_NAME: "proxy-extension-bridge",
     PROTOCOL_VERSION: 1,
-    VERSION: "0.2.7",
+    VERSION: "0.2.8",
     SETTINGS_VERSION: 2,
     STORAGE_KEY: "bridgeSettings",
     AUDIT_STORAGE_KEY: "proxyAuditLog",

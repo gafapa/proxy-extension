@@ -19,7 +19,7 @@
         </div>
         <div class="status-card" aria-label="Extension status">
           <span id="version-label">Version</span>
-          <strong id="extension-version">0.2.7</strong>
+          <strong id="extension-version">0.2.8</strong>
           <span id="site-count-label">Authorized sites</span>
           <strong id="site-count">0</strong>
         </div>
@@ -79,12 +79,27 @@
                   <input id="request-timeout-ms" name="requestTimeoutMs" type="number" min="1000" max="120000" step="1000" required />
                 </label>
                 <label class="field-block">
-                  <span id="max-body-label">Max request body size (bytes, 0 = unlimited)</span>
-                  <input id="max-body-bytes" name="maxBodyBytes" type="number" min="0" max="10485760" step="1024" required />
+                  <span id="max-body-label">Max request body size</span>
+                  <select id="max-body-bytes" name="maxBodyBytes" required>
+                    <option value="1048576">1 MB</option>
+                    <option value="5242880">5 MB</option>
+                    <option value="10485760">10 MB</option>
+                    <option value="26214400">25 MB</option>
+                    <option value="52428800">50 MB</option>
+                    <option value="104857600">100 MB</option>
+                    <option id="unlimited-body-option" value="0">Unlimited</option>
+                  </select>
                 </label>
                 <label class="field-block">
-                  <span id="max-response-label">Max response body size (bytes)</span>
-                  <input id="max-response-bytes" name="maxResponseBytes" type="number" min="1024" max="52428800" step="1024" required />
+                  <span id="max-response-label">Max response body size</span>
+                  <select id="max-response-bytes" name="maxResponseBytes" required>
+                    <option value="1048576">1 MB</option>
+                    <option value="5242880">5 MB</option>
+                    <option value="10485760">10 MB</option>
+                    <option value="26214400">25 MB</option>
+                    <option value="52428800">50 MB</option>
+                    <option value="104857600">100 MB</option>
+                  </select>
                 </label>
               </div>
             </section>

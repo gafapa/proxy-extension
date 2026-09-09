@@ -15,13 +15,20 @@ const pageBridge = require(path.join(__dirname, "..", "proxy", "shared", "page-b
   });
 
   assert.equal(settings.requestTimeoutMs, 120000);
-  assert.equal(settings.maxBodyBytes, 1024);
-  assert.equal(settings.maxResponseBytes, 50 * 1024 * 1024);
+  assert.equal(settings.maxBodyBytes, 1024 * 1024);
+  assert.equal(settings.maxResponseBytes, 100 * 1024 * 1024);
   assert.deepEqual(settings.allowedMethods, ["GET", "POST", "PROPFIND", "MKCOL"]);
   assert.deepEqual(settings.allowedPagePatterns, ["https://example.com/*", "http://localhost/*"]);
   assert.equal(settings.originPolicies["example.com"].enabled, true);
   assert.equal(settings.originPolicies.localhost.localNetworkAccess, true);
   assert.equal(settings.uiLanguage, "es");
+})();
+
+(function testSizeSettingsUseSelectOptions() {
+  const settings = core.normalizeSettings({ maxBodyBytes: 2 * 1024 * 1024, maxResponseBytes: 26 * 1024 * 1024 });
+
+  assert.equal(settings.maxBodyBytes, 5 * 1024 * 1024);
+  assert.equal(settings.maxResponseBytes, 50 * 1024 * 1024);
 })();
 
 (function testStoredMethodMigrationRunsOnlyForLegacySettings() {
@@ -75,8 +82,8 @@ const pageBridge = require(path.join(__dirname, "..", "proxy", "shared", "page-b
 })();
 
 (function testBuildRequestRejectsBodySize() {
-  const settings = core.normalizeSettings({ maxBodyBytes: 1024, allowedMethods: ["POST"] });
-  const largeBody = "x".repeat(2048);
+  const settings = core.normalizeSettings({ maxBodyBytes: 1024 * 1024, allowedMethods: ["POST"] });
+  const largeBody = "x".repeat(2 * 1024 * 1024);
   assert.throws(
     () => core.buildRequest({ url: "https://example.com", method: "POST", body: largeBody }, settings, ["https://*/*"]),
     (error) => error.code === "body_too_large",
@@ -225,7 +232,7 @@ const pageBridge = require(path.join(__dirname, "..", "proxy", "shared", "page-b
 })();
 
 (async function testExecuteRequestRejectsLargeResponseBody() {
-  const settings = core.normalizeSettings({ maxResponseBytes: 1024 });
+  const settings = core.normalizeSettings({ maxResponseBytes: 1024 * 1024 });
 
   await assert.rejects(
     () => core.executeRequest(
@@ -243,7 +250,7 @@ const pageBridge = require(path.join(__dirname, "..", "proxy", "shared", "page-b
         headers: {
           forEach() {},
         },
-        text: async () => "x".repeat(2048),
+        text: async () => "x".repeat(2 * 1024 * 1024),
       }),
     ),
     (error) => error.code === "response_too_large",
