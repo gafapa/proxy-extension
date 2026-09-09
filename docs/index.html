@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
@@ -53,7 +53,6 @@
       <main id="top">
         <section class="hero">
           <div class="hero-copy">
-            <p class="kicker" data-i18n="heroKicker">Chrome MV3 proxy</p>
             <h1 data-i18n="heroTitle">Resolve browser-side CORS blockers with a direct extension bridge.</h1>
             <p class="lead" data-i18n="heroLead">
               Proxy forwards requests through a Chrome service worker so your frontend can reach blocked endpoints from gallego.top, its subdomains, edunoza.com, and local development pages.
@@ -64,25 +63,36 @@
             </div>
           </div>
 
-          <aside class="hero-meta" aria-label="Extension summary" data-i18n-attr="aria-label:heroMetaAriaLabel">
-            <div class="meta-row">
-              <span class="meta-label" data-i18n="metaFlowLabel">Flow</span>
-              <strong data-i18n="metaFlowValue">page -> content script -> service worker -> target</strong>
+          <aside class="bridge-console" aria-label="Extension summary" data-i18n-attr="aria-label:heroMetaAriaLabel">
+            <div class="console-bar">
+              <span class="console-dot"></span>
+              <span class="console-dot"></span>
+              <span class="console-dot"></span>
+              <span class="console-title">proxy.runtime</span>
             </div>
-            <div class="meta-row">
-              <span class="meta-label" data-i18n="metaCallersLabel">Caller pages</span>
-              <strong data-i18n="metaCallersValue">gallego.top, edunoza.com, localhost, 127.0.0.1</strong>
-            </div>
-            <div class="meta-row">
-              <span class="meta-label" data-i18n="metaTargetsLabel">Target hosts</span>
-              <strong data-i18n="metaTargetsValue">HTTP/HTTPS endpoints; private network requires permission</strong>
+            <div class="console-body">
+              <div class="request-line"><span>PUT</span><code>/encrypted-file</code><strong>200 OK</strong></div>
+              <div class="flow-map" aria-hidden="true">
+                <span>PAGE</span><i></i><span>CONTENT</span><i></i><span>WORKER</span><i></i><span>TARGET</span>
+              </div>
+              <div class="console-result">
+                <span>Authorization</span>
+                <strong>forwarded</strong>
+                <span>If-Match</span>
+                <strong>verified</strong>
+              </div>
             </div>
           </aside>
         </section>
 
+        <aside class="hero-meta" aria-label="Extension summary" data-i18n-attr="aria-label:heroMetaAriaLabel">
+          <div class="meta-row"><span class="meta-label" data-i18n="metaFlowLabel">Flow</span><strong data-i18n="metaFlowValue">page -> content script -> service worker -> target</strong></div>
+          <div class="meta-row"><span class="meta-label" data-i18n="metaCallersLabel">Caller pages</span><strong data-i18n="metaCallersValue">gallego.top, edunoza.com, localhost, 127.0.0.1</strong></div>
+          <div class="meta-row"><span class="meta-label" data-i18n="metaTargetsLabel">Target hosts</span><strong data-i18n="metaTargetsValue">HTTP/HTTPS endpoints; private network requires permission</strong></div>
+        </aside>
+
         <section class="section" id="download">
           <div class="section-header">
-            <p class="kicker" data-i18n="downloadKicker">Download</p>
             <h2 data-i18n="downloadTitle">One package, ready to extract.</h2>
           </div>
           <div class="download-panel">
@@ -97,7 +107,6 @@
 
         <section class="section" id="install">
           <div class="section-header">
-            <p class="kicker" data-i18n="installKicker">Install</p>
             <h2 data-i18n="installTitle">Load the extension in Chrome.</h2>
           </div>
           <div class="steps">
@@ -126,7 +135,6 @@
 
         <section class="section" id="scope">
           <div class="section-header">
-            <p class="kicker" data-i18n="scopeKicker">Scope</p>
             <h2 data-i18n="scopeTitle">Open target access, restricted caller access.</h2>
           </div>
           <div class="scope-grid">
@@ -145,14 +153,13 @@
 
         <section class="final-call">
           <div>
-            <p class="kicker" data-i18n="finalKicker">Ready</p>
             <h2 data-i18n="finalTitle">Download the package and load it directly into Chrome.</h2>
             <p class="muted final-links">
               <a href="./extension-test.html" data-i18n="finalTestBench">Extension test bench</a>
               <span>·</span>
               <a href="./bridge-client.example.js" data-i18n="finalClientExample">Bridge client example</a>
               <span>·</span>
-              <a href="../CHANGELOG.md" data-i18n="finalChangelog">Changelog</a>
+              <a href="https://github.com/gafapa/proxy-extension/blob/master/CHANGELOG.md" data-i18n="finalChangelog">Changelog</a>
             </p>
           </div>
           <a class="button button-primary" href="./downloads/proxy-extension.zip" download data-i18n="finalCta">Get Proxy</a>

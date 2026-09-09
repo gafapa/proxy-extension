@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-10T00:00:00+02:00",
+  "title": "Design System: Proxy",
+  "extensions": {
+    "colorMeta": {
+      "signal-lime": { "role": "primary", "displayName": "Signal Lime", "canonical": "#b7f36b", "tonalRamp": ["oklch(15% 0.08 126)", "oklch(25% 0.10 126)", "oklch(37% 0.12 126)", "oklch(49% 0.14 126)", "oklch(62% 0.15 126)", "#b7f36b", "oklch(88% 0.10 126)", "oklch(95% 0.04 126)"] },
+      "signal-lime-strong": { "role": "primary", "displayName": "Signal Lime Strong", "canonical": "#9fe34f", "tonalRamp": ["oklch(15% 0.08 126)", "oklch(25% 0.10 126)", "oklch(37% 0.12 126)", "oklch(49% 0.14 126)", "oklch(61% 0.16 126)", "#9fe34f", "oklch(88% 0.10 126)", "oklch(95% 0.04 126)"] },
+      "signal-ink": { "role": "neutral", "displayName": "Signal Ink", "canonical": "#14200d", "tonalRamp": ["#14200d", "oklch(25% 0.04 126)", "oklch(37% 0.04 126)", "oklch(49% 0.04 126)", "oklch(62% 0.035 126)", "oklch(74% 0.03 126)", "oklch(86% 0.02 126)", "oklch(95% 0.01 126)"] },
+      "warm-canvas": { "role": "neutral", "displayName": "Warm Canvas", "canonical": "#151714", "tonalRamp": ["#151714", "oklch(25% 0.01 126)", "oklch(37% 0.01 126)", "oklch(49% 0.01 126)", "oklch(62% 0.009 126)", "oklch(74% 0.008 126)", "oklch(86% 0.006 126)", "oklch(95% 0.004 126)"] },
+      "warm-surface": { "role": "neutral", "displayName": "Warm Surface", "canonical": "#1d201c", "tonalRamp": ["oklch(15% 0.01 126)", "#1d201c", "oklch(37% 0.01 126)", "oklch(49% 0.01 126)", "oklch(62% 0.009 126)", "oklch(74% 0.008 126)", "oklch(86% 0.006 126)", "oklch(95% 0.004 126)"] },
+      "console-black": { "role": "neutral", "displayName": "Console Black", "canonical": "#0d0f0c", "tonalRamp": ["#0d0f0c", "oklch(25% 0.008 126)", "oklch(37% 0.008 126)", "oklch(49% 0.008 126)", "oklch(62% 0.007 126)", "oklch(74% 0.006 126)", "oklch(86% 0.005 126)", "oklch(95% 0.003 126)"] },
+      "primary-text": { "role": "neutral", "displayName": "Primary Text", "canonical": "#f4f4ec", "tonalRamp": ["oklch(15% 0.008 100)", "oklch(27% 0.008 100)", "oklch(39% 0.008 100)", "oklch(51% 0.008 100)", "oklch(63% 0.008 100)", "oklch(75% 0.008 100)", "oklch(87% 0.008 100)", "#f4f4ec"] },
+      "muted-text": { "role": "neutral", "displayName": "Muted Text", "canonical": "#b5b9ac", "tonalRamp": ["oklch(15% 0.01 126)", "oklch(27% 0.01 126)", "oklch(39% 0.01 126)", "oklch(51% 0.01 126)", "oklch(63% 0.01 126)", "#b5b9ac", "oklch(87% 0.008 126)", "oklch(95% 0.004 126)"] },
+      "structural-line": { "role": "neutral", "displayName": "Structural Line", "canonical": "#363b32", "tonalRamp": ["oklch(15% 0.015 126)", "#363b32", "oklch(37% 0.015 126)", "oklch(49% 0.014 126)", "oklch(62% 0.012 126)", "oklch(74% 0.01 126)", "oklch(86% 0.007 126)", "oklch(95% 0.004 126)"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Oversized first-viewport statements." },
+      "headline": { "displayName": "Headline", "purpose": "Major section statements." },
+      "title": { "displayName": "Title", "purpose": "Compact step and component headings." },
+      "body": { "displayName": "Body", "purpose": "Explanations and scope copy." },
+      "label": { "displayName": "System Label", "purpose": "Metadata, versions, flow nodes, and runtime state." }
+    },
+    "shadows": [
+      { "name": "console-lift", "value": "0 28px 80px rgba(0, 0, 0, 0.38)", "purpose": "Ambient elevation reserved for the bridge console." },
+      { "name": "signal-glow", "value": "0 0 14px rgba(183, 243, 107, 0.7)", "purpose": "Glow attached to the moving transmission dot." }
+    ],
+    "motion": [
+      { "name": "control-response", "value": "160ms ease", "purpose": "Button lift and color changes, plus navigation hover." },
+      { "name": "transmission", "value": "2.4s cubic-bezier(0.2, 0.7, 0.2, 1) infinite", "purpose": "Staggered data travel across bridge connectors." }
+    ],
+    "breakpoints": [
+      { "name": "stack", "value": "980px" },
+      { "name": "mobile", "value": "720px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The solid lime action for downloads and primary completion.",
+      "html": "<button class=\"ds-btn-primary\">DOWNLOAD PACKAGE</button>",
+      "css": ".ds-btn-primary { min-height: 48px; padding: 0 20px; border: 1px solid var(--accent, #b7f36b); border-radius: 10px; background: var(--accent, #b7f36b); color: var(--accent-ink, #14200d); font: 700 1rem Manrope, sans-serif; transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease; } .ds-btn-primary:hover { border-color: var(--accent-strong, #9fe34f); background: var(--accent-strong, #9fe34f); transform: translateY(-2px); } .ds-btn-primary:focus-visible { outline: 2px solid var(--accent, #b7f36b); outline-offset: 4px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "A restrained dark action for secondary navigation.",
+      "html": "<button class=\"ds-btn-secondary\">INSTALLATION GUIDE</button>",
+      "css": ".ds-btn-secondary { min-height: 48px; padding: 0 20px; border: 1px solid var(--line, #363b32); border-radius: 10px; background: var(--surface, #1d201c); color: var(--text, #f4f4ec); font: 700 1rem Manrope, sans-serif; transition: transform 160ms ease, border-color 160ms ease; } .ds-btn-secondary:hover { transform: translateY(-2px); border-color: #4a5145; } .ds-btn-secondary:focus-visible { outline: 2px solid var(--accent, #b7f36b); outline-offset: 4px; }"
+    },
+    {
+      "name": "Language Field",
+      "kind": "input",
+      "description": "A compact locale selector for the localized static site.",
+      "html": "<label class=\"ds-language\"><span>LANGUAGE</span><select><option>English</option><option>Español</option></select></label>",
+      "css": ".ds-language { display: inline-flex; align-items: center; gap: 8px; color: var(--muted, #b5b9ac); font: 400 .72rem 'IBM Plex Mono', monospace; letter-spacing: .05em; } .ds-language select { min-height: 36px; padding: 0 30px 0 10px; border: 1px solid var(--line, #363b32); border-radius: 9px; background: var(--surface, #1d201c); color: var(--text, #f4f4ec); font: 400 .86rem Manrope, sans-serif; } .ds-language select:hover { border-color: #4a5145; } .ds-language select:focus-visible { outline: 2px solid var(--accent, #b7f36b); outline-offset: 4px; }"
+    },
+    {
+      "name": "Version Chip",
+      "kind": "chip",
+      "refersTo": "version-chip",
+      "description": "Compact release metadata in the navigation cluster.",
+      "html": "<span class=\"ds-version\">v0.2.8</span>",
+      "css": ".ds-version { display: inline-flex; align-items: center; min-height: 36px; padding: 0 10px; border: 1px solid var(--line, #363b32); border-radius: 9px; background: var(--surface, #1d201c); color: var(--accent, #b7f36b); font: 400 .72rem 'IBM Plex Mono', monospace; }"
+    },
+    {
+      "name": "Compact Navigation",
+      "kind": "nav",
+      "description": "Muted anchor navigation that becomes brighter on interaction.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\">Download</a><a href=\"#\">Install</a><a href=\"#\">Scope</a></nav>",
+      "css": ".ds-nav { display: flex; gap: 26px; align-items: center; } .ds-nav a { color: var(--muted, #b5b9ac); font: 400 .9rem Manrope, sans-serif; text-decoration: none; transition: color 160ms ease; } .ds-nav a:hover { color: var(--text, #f4f4ec); } .ds-nav a:focus-visible { outline: 2px solid var(--accent, #b7f36b); outline-offset: 4px; }"
+    },
+    {
+      "name": "Bridge Console",
+      "kind": "custom",
+      "description": "The signature proof showing a successful request traveling through the four-stage bridge.",
+      "html": "<section class=\"ds-console\"><div class=\"ds-console-bar\"><i></i><i></i><i></i><span>proxy.runtime</span></div><div class=\"ds-request\"><b>PUT</b><code>/encrypted-file</code><strong>200 OK</strong></div><div class=\"ds-flow\"><span>PAGE</span><em></em><span>CONTENT</span><em></em><span>WORKER</span><em></em><span>TARGET</span></div></section>",
+      "css": ".ds-console { overflow: hidden; max-width: 620px; border: 1px solid #43493e; border-radius: 14px; background: var(--bg, #0d0f0c); color: var(--text, #f4f4ec); box-shadow: 0 28px 80px rgba(0,0,0,.38); font-family: 'IBM Plex Mono', monospace; } .ds-console-bar { display: flex; align-items: center; gap: 7px; min-height: 48px; padding: 0 16px; border-bottom: 1px solid #2b3028; background: #181b16; } .ds-console-bar i { width: 8px; height: 8px; border-radius: 50%; background: #4b5147; } .ds-console-bar i:first-child { background: var(--accent, #b7f36b); } .ds-console-bar span { margin-left: auto; color: #858c7d; font-size: .7rem; } .ds-request { display: grid; grid-template-columns: auto 1fr auto; gap: 16px; padding: 34px 34px 20px; border-bottom: 1px solid #2b3028; font-size: .78rem; } .ds-request b, .ds-request strong { color: var(--accent, #b7f36b); } .ds-flow { display: grid; grid-template-columns: auto 1fr auto 1fr auto 1fr auto; align-items: center; gap: 8px; padding: 34px; } .ds-flow span { display: grid; place-items: center; width: 58px; aspect-ratio: 1; border: 1px solid #4a5145; border-radius: 12px; background: #181b16; font-size: .6rem; } .ds-flow em { height: 1px; background: #4a5145; } .ds-console:focus-within { outline: 2px solid var(--accent, #b7f36b); outline-offset: 4px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Living Bridge",
+    "overview": "Proxy uses a warm near-black canvas and a precise lime signal to make an invisible browser bridge feel concrete. Oversized Manrope statements establish confidence; IBM Plex Mono labels, request metadata, and the animated page-to-target path supply technical proof without turning the page into developer tooling.\n\nThe system is spacious at the statement level and compact at the control level. Thin structural rules organize content, while one deep console and one solid lime download block carry the strongest depth and color moments. Proxy's geometric icon, factual scope language, localization, and lightweight static implementation remain part of the identity.",
+    "keyCharacteristics": [
+      "Warm dark canvas with restrained tonal layering.",
+      "Lime used as a signal for action, success, and transmission.",
+      "Bold, tightly tracked Manrope display type paired with compact IBM Plex Mono metadata.",
+      "Large editorial sections divided by fine rules rather than repeated cards.",
+      "A living page → content → worker → target bridge as the signature proof."
+    ],
+    "rules": [
+      { "name": "The Signal Color Rule", "body": "Use lime for action, state, and data movement; keep most reading surfaces neutral so every lime mark carries meaning.", "section": "colors" },
+      { "name": "The Two Voices Rule", "body": "Use Manrope for human explanation and IBM Plex Mono for system identity, state, sequence, and metadata.", "section": "typography" },
+      { "name": "The Statement-to-Proof Rule", "body": "Pair a large claim with a concrete mechanism or constraint; never let the display scale outrun the product evidence beside it.", "section": "layout" },
+      { "name": "The Singular Lift Rule", "body": "Reserve strong elevation for the bridge proof; ordinary sections and controls stay flat.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do preserve the warm near-black foundation and use thin structural lines to organize long-form content.",
+      "Do keep display copy short enough to retain the tight, oversized Manrope silhouette across locales.",
+      "Do use mono labels for runtime facts, sequence, versions, and metadata.",
+      "Do translate grid-based proof into a readable vertical sequence on narrow screens.",
+      "Do retain the Proxy icon, factual content, localization hooks, and static asset model."
+    ],
+    "donts": [
+      "Don't spread lime across decorative backgrounds or routine body copy.",
+      "Don't introduce a second accent hue or competing illustration style.",
+      "Don't turn installation steps and scope facts into a dense collection of elevated cards.",
+      "Don't apply console perspective on tablet or mobile layouts.",
+      "Don't add visual claims, customer proof, or performance metrics absent from the product record."
+    ]
+  }
+}
