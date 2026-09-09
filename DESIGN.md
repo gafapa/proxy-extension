@@ -14,13 +14,13 @@ colors:
 typography:
   display:
     fontFamily: "Manrope, Segoe UI, sans-serif"
-    fontSize: "clamp(2.8rem, 4vw, 4.1rem)"
+    fontSize: "clamp(2.35rem, 3.2vw, 3.25rem)"
     fontWeight: 700
     lineHeight: 0.94
     letterSpacing: "-0.04em"
   headline:
     fontFamily: "Manrope, Segoe UI, sans-serif"
-    fontSize: "clamp(2.1rem, 3.4vw, 3.4rem)"
+    fontSize: "clamp(1.75rem, 2.5vw, 2.5rem)"
     fontWeight: 700
     lineHeight: 0.98
     letterSpacing: "-0.04em"
