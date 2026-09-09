@@ -75,7 +75,7 @@ a { color: inherit; text-underline-offset: 0.2em; }
 .hero-copy { position: relative; z-index: 1; }
 .hero > * { min-width: 0; }
 h1, h2, h3, .package-name { margin: 0; font-weight: 700; letter-spacing: -0.04em; }
-h1 { max-width: 13ch; font-size: clamp(3.4rem, 5.2vw, 5.2rem); line-height: 0.94; text-wrap: balance; }
+h1 { max-width: 15ch; font-size: clamp(2.8rem, 4vw, 4.1rem); line-height: 0.98; text-wrap: balance; }
 h1::first-line { color: var(--accent); }
 .lead, .muted, .step p, .scope-copy p, .scope-list { color: var(--muted); line-height: 1.65; }
 .lead { max-width: 60ch; margin: 28px 0 0; font-size: 1.05rem; }
@@ -139,7 +139,7 @@ h1::first-line { color: var(--accent); }
 .meta-row strong { display: block; margin-top: 10px; overflow-wrap: anywhere; font-size: 0.9rem; line-height: 1.45; }
 .section { padding: 104px 0; border-bottom: 1px solid var(--line); }
 .section-header { max-width: 800px; }
-h2 { max-width: 18ch; font-size: clamp(2.5rem, 5vw, 4.8rem); line-height: 0.98; text-wrap: balance; }
+h2 { max-width: 20ch; font-size: clamp(2.1rem, 3.4vw, 3.4rem); line-height: 1.02; text-wrap: balance; }
 .download-panel { display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: end; margin-top: 48px; padding: clamp(28px, 5vw, 56px); border-radius: var(--radius); background: var(--accent); color: var(--accent-ink); }
 .download-panel .meta-label, .download-panel .muted { color: #314524; }
 .download-panel .button-primary { border-color: var(--accent-ink); background: var(--accent-ink); color: var(--text); }
@@ -179,7 +179,7 @@ h2 { max-width: 18ch; font-size: clamp(2.5rem, 5vw, 4.8rem); line-height: 0.98; 
   .topnav { order: 2; width: 100%; gap: 18px; }
   .language-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); }
   .hero { gap: 48px; padding: 64px 0 48px; }
-  h1 { width: 100%; max-width: 100%; font-size: clamp(2.5rem, 10vw, 3.2rem); overflow-wrap: break-word; text-wrap: wrap; }
+  h1 { width: 100%; max-width: 100%; font-size: clamp(2.25rem, 8.5vw, 2.7rem); overflow-wrap: break-word; text-wrap: wrap; }
   .lead { width: 100%; max-width: 100%; overflow-wrap: break-word; }
   .request-line { grid-template-columns: auto minmax(0, 1fr) auto; gap: 10px; }
   .request-line code { overflow: hidden; text-overflow: ellipsis; }

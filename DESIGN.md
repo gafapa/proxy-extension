@@ -14,13 +14,13 @@ colors:
 typography:
   display:
     fontFamily: "Manrope, Segoe UI, sans-serif"
-    fontSize: "clamp(3.4rem, 5.2vw, 5.2rem)"
+    fontSize: "clamp(2.8rem, 4vw, 4.1rem)"
     fontWeight: 700
     lineHeight: 0.94
     letterSpacing: "-0.04em"
   headline:
     fontFamily: "Manrope, Segoe UI, sans-serif"
-    fontSize: "clamp(2.5rem, 5vw, 4.8rem)"
+    fontSize: "clamp(2.1rem, 3.4vw, 3.4rem)"
     fontWeight: 700
     lineHeight: 0.98
     letterSpacing: "-0.04em"
@@ -198,7 +198,7 @@ The signature console visualizes the complete page → content → worker → ta
 ### Do:
 
 - **Do** preserve the warm near-black foundation and use thin structural lines to organize long-form content.
-- **Do** keep display copy short enough to retain the tight, oversized Manrope silhouette across locales.
+- **Do** keep display copy concise enough to retain a clear Manrope silhouette across locales.
 - **Do** use mono labels for runtime facts, sequence, versions, and metadata.
 - **Do** translate grid-based proof into a readable vertical sequence on narrow screens.
 - **Do** retain the Proxy icon, factual content, localization hooks, and static asset model.

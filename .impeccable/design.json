@@ -15,7 +15,7 @@
       "structural-line": { "role": "neutral", "displayName": "Structural Line", "canonical": "#363b32", "tonalRamp": ["oklch(15% 0.015 126)", "#363b32", "oklch(37% 0.015 126)", "oklch(49% 0.014 126)", "oklch(62% 0.012 126)", "oklch(74% 0.01 126)", "oklch(86% 0.007 126)", "oklch(95% 0.004 126)"] }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "Oversized first-viewport statements." },
+      "display": { "displayName": "Display", "purpose": "Prominent first-viewport statements." },
       "headline": { "displayName": "Headline", "purpose": "Major section statements." },
       "title": { "displayName": "Title", "purpose": "Compact step and component headings." },
       "body": { "displayName": "Body", "purpose": "Explanations and scope copy." },
@@ -99,7 +99,7 @@
     ],
     "dos": [
       "Do preserve the warm near-black foundation and use thin structural lines to organize long-form content.",
-      "Do keep display copy short enough to retain the tight, oversized Manrope silhouette across locales.",
+      "Do keep display copy concise enough to retain a clear Manrope silhouette across locales.",
       "Do use mono labels for runtime facts, sequence, versions, and metadata.",
       "Do translate grid-based proof into a readable vertical sequence on narrow screens.",
       "Do retain the Proxy icon, factual content, localization hooks, and static asset model."
